@@ -30,7 +30,7 @@ function productOfArray(arr){
 }
 '''
 #--In Python--#
-
+'''
 def productOfArray(arr):
     if len(arr) == 0:
         return 1
@@ -38,3 +38,30 @@ def productOfArray(arr):
 
 print(productOfArray([1, 2, 3]))
 print(productOfArray([1, 2, 3, 10]))
+'''
+
+# Example 3: recursiveRange
+# Write a function called recursiveRange  which accepts a number and adds
+# up all the numbers from 0 to the number passed to the function .
+
+#--In JavaScript--#
+'''
+function recursiveRange(num){
+    if(num === 0){
+        return 0;
+    }
+   return num+recursiveRange(num-1);
+}
+'''
+#--In Python--#
+
+'''
+def recursiveRange(num):
+    if num == 0:
+        return 0
+    return num+recursiveRange(num-1)
+
+print(recursiveRange(6))
+print(recursiveRange(10))
+'''
+
