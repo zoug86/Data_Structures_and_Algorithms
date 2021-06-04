@@ -87,10 +87,58 @@ function fib(num){
 '''
 
 #--In Python--#
-
+'''
 def fib(num):
     if num == 1 or num == 2:
         return 1
     return fib(num-1)+fib(num-2)
 
 print(fib(7))
+'''
+
+# Example 5: String Reverse
+# Write a recursive function called fib which accepts a string and returns a new string in reverse.
+
+#--In JavaScript--#
+
+'''
+function reverse(str){
+  // add whatever parameters you deem necessary - good luck!
+  let strRev = "";
+  function helper(temp){
+      if(temp.length === 0){
+        return strRev;
+  }
+  
+      strRev += temp[temp.length-1];
+     let temp2 = temp.substring(0,temp.length - 1);
+      helper(temp2);
+  }
+  
+  helper(str);
+  return strRev;
+  
+}
+
+// reverse('awesome') // 'emosewa'
+// reverse('rithmschool') // 'loohcsmhtir'
+'''
+
+
+#--In Python--#
+
+
+str_rev = ""
+
+def reverse(temp):
+    global str_rev
+    if len(temp) == 0:
+        return str_rev
+    str_rev += temp[len(temp)-1]
+    temp2 = temp[0:len(temp)-1]
+    return reverse(temp2)
+
+#print(reverse('awesome'))
+print(reverse('rithmschool'))
+
+
