@@ -124,10 +124,9 @@ function reverse(str){
 // reverse('rithmschool') // 'loohcsmhtir'
 '''
 
-
 #--In Python--#
 
-
+'''
 str_rev = ""
 
 def reverse(temp):
@@ -140,5 +139,54 @@ def reverse(temp):
 
 #print(reverse('awesome'))
 print(reverse('rithmschool'))
+'''
 
+# Example 6: Palindrome
+# Write a recursive function called isPalindrome  which returns true if the string passed to it is a palindrome
+# (reads the same forward and backward). Otherwise it returns false..
 
+#--In JavaScript--#
+
+'''
+// isPalindrome('awesome') // false
+// isPalindrome('foobar') // false
+// isPalindrome('tacocat') // true
+// isPalindrome('amanaplanacanalpanama') // true
+// isPalindrome('amanaplanacanalpandemonium') // false
+let new_str = "";
+function isPalindrome(temp){
+  // add whatever parameters you deem necessary - good luck
+  let end = temp.length;
+  let start = 0;
+ 
+   if(temp[start] !== temp[end-1]){
+     return false;
+   }
+   start++;
+   end--;
+   if(end === 2){
+     return true;
+   }
+   new_str = temp.substring(start, end);
+   return isPalindrome(new_str);
+}
+'''
+
+#--In Python--#
+
+new_str = ""
+
+def isPalindrome(str):
+    global new_str
+    start = 0
+    end = len(str)
+    if str[start] != str[end-1]:
+        return False
+    start += 1
+    end -= 1
+    if end == 2:
+        return True
+    new_str = str[start:end]
+    return isPalindrome(new_str)
+
+print(isPalindrome('amanaplanacanalpanama'))
