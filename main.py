@@ -248,6 +248,25 @@ print(binary_search([5,6,10,13,14,18,30,34,35,37,40,44,64,79,84,86,95,96,98,99],
 
 ### Naive String Search: Find the recurrence of a substring in a string
 
+#--In JavaScript--#
+'''
+function subString(lg_str, sm_str){
+    let count = 0;
+    for(let i = 0; i < lg_str.length; i++){
+        for(let j = 0; j< sm_str.length; j++){
+           if(lg_str[i] !== sm_str[j]){
+              break;
+           }
+           if(j === sm_str.length - 1){
+           count++;
+        }
+    } 
+    return count;
+}
+'''
+
+#--In Python--#
+
 def sub_string(lg_str, sm_str):
     count = 0
     k = 0
