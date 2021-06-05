@@ -296,6 +296,7 @@ print(sub_string('myhellonameishelhoussemloandhelloagain','houssem'))
 
 #--In Python--#
 
+'''
 def compute_lps_array(short, m, lps_arr):
     i = 0
     j = 1
@@ -322,7 +323,7 @@ def KMP_search(large, short):
 
     i = 0
     j = 0
-    while i < n-m+1:
+    while i < n:
         if large[i] == short[j]:
             i += 1
             j += 1
@@ -337,10 +338,19 @@ def KMP_search(large, short):
     return count
 
 print(KMP_search('myhellonameishelhoussemloandhelloagain','hello'))
+'''
+
+###### Third topic: Sorting Algorithms - June 05 2021 ######
+
+           ###########Bubble Sort#############
 
 
+#--In JavaScript--#
+'''
 
+'''
 
+#--In Python--#
 
 
 
