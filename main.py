@@ -368,14 +368,21 @@ function BubbleSort(arr){
 
 #--In Python--#
 
+'''
+
+'''
 def bubble_sort(arr):
 
     for i in range(len(arr), 0, -1):
+        noSwaps = True
         for j in range(0, i-1):
             if arr[j] > arr[j+1]:
                 temp = arr[j+1]
                 arr[j+1] = arr[j]
                 arr[j] = temp
+                noSwaps = False
+        if noSwaps:
+            break
     return arr
 
 
