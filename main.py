@@ -267,6 +267,7 @@ function subString(lg_str, sm_str){
 
 #--In Python--#
 
+'''
 def sub_string(lg_str, sm_str):
     count = 0
     k = 0
@@ -283,10 +284,48 @@ def sub_string(lg_str, sm_str):
 
 
 print(sub_string('myhellonameishelhoussemloandhelloagain','houssem'))
+'''
+
+### KNP Algorithm: Find the recurrence of a substring in a string
 
 
+#--In JavaScript--#
+'''
+function subString(lg_str, sm_str){
+    let count = 0;
+    for(let i = 0; i < lg_str.length; i++){
+        for(let j = 0; j< sm_str.length; j++){
+           if(lg_str[i+j] !== sm_str[j]){
+              break;
+           }
+           if(j === sm_str.length - 1){
+           count++;
+        }
+    } 
+    return count;
+}
+'''
+
+#--In Python--#
+
+'''
+def sub_string(lg_str, sm_str):
+    count = 0
+    k = 0
+    for i in range(len(lg_str)):
+        for j in range(len(sm_str)):
+            if lg_str[i+k] != sm_str[j]:
+                break
+            else:
+                k += 1
+        if k == len(sm_str):
+            count += 1
+        k = 0
+    return count
 
 
+print(sub_string('myhellonameishelhoussemloandhelloagain','houssem'))
+'''
 
 
 
