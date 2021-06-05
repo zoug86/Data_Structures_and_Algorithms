@@ -286,46 +286,58 @@ def sub_string(lg_str, sm_str):
 print(sub_string('myhellonameishelhoussemloandhelloagain','houssem'))
 '''
 
-### KNP Algorithm: Find the recurrence of a substring in a string
+### KMP Algorithm: Find the recurrence of a substring in a string
 
 
 #--In JavaScript--#
+
 '''
-function subString(lg_str, sm_str){
-    let count = 0;
-    for(let i = 0; i < lg_str.length; i++){
-        for(let j = 0; j< sm_str.length; j++){
-           if(lg_str[i+j] !== sm_str[j]){
-              break;
-           }
-           if(j === sm_str.length - 1){
-           count++;
-        }
-    } 
-    return count;
-}
 '''
 
 #--In Python--#
 
-'''
-def sub_string(lg_str, sm_str):
-    count = 0
-    k = 0
-    for i in range(len(lg_str)):
-        for j in range(len(sm_str)):
-            if lg_str[i+k] != sm_str[j]:
-                break
+def compute_lps_array(short, m, lps_arr):
+    i = 0
+    j = 1
+    lps_arr[0] = 0
+    while j < m:
+        if short[j] == short[i]:
+            lps_arr[j] = i + 1
+            i += 1
+            j += 1
+        else:
+            if i != 0:
+                i = lps_arr[i-1]
             else:
-                k += 1
-        if k == len(sm_str):
+                lps_arr[j] = 0
+                j += 1
+
+
+def KMP_search(large, short):
+    count = 0
+    n = len(large)
+    m = len(short)
+    lps_arr = [0]*m
+    compute_lps_array(short, m, lps_arr)
+
+    i = 0
+    j = 0
+    while i < n-m+1:
+        if large[i] == short[j]:
+            i += 1
+            j += 1
+        else:
+            if j != 0:
+                j = lps_arr[j-1]
+            else:
+                i += 1
+        if j == m:
             count += 1
-        k = 0
+            j = lps_arr[j-1]
     return count
 
+print(KMP_search('myhellonameishelhoussemloandhelloagain','hello'))
 
-print(sub_string('myhellonameishelhoussemloandhelloagain','houssem'))
-'''
 
 
 
