@@ -347,13 +347,32 @@ print(KMP_search('myhellonameishelhoussemloandhelloagain','hello'))
 
 #--In JavaScript--#
 '''
-
+function BubbleSort(arr){
+    let temp;
+    for(let i = arr.length; i >= 0; i--){
+        for(let j = 0; j < i-1; j++){
+            if(arr[j] > arr[j+1]){
+                temp = arr[j+1];
+                arr[j+1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    return arr;
+}
 '''
 
 #--In Python--#
 
+def bubble_sort(arr):
+
+    for i in range(len(arr), 0, -1):
+        for j in range(0, i-1):
+            if arr[j] > arr[j+1]:
+                temp = arr[j+1]
+                arr[j+1] = arr[j]
+                arr[j] = temp
+    return arr
 
 
-
-
-
+print(bubble_sort([12, 34, 5, 56, 11, 99, 123, 3, -12, 234, 11, 66, 11, 7789, 1234, 10, 1, -11, 123456, -1234]))
