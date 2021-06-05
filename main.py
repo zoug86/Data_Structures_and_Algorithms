@@ -219,6 +219,7 @@ function binarySearch(arr, num){
 
 #--In Python--#
 
+'''
 import math
 
 def binary_search(arr, num):
@@ -243,13 +244,26 @@ print(binary_search([1, 2, 3, 4, 5], 6))
 print(binary_search([5,6,10,13,14,18,30,34,35,37,40,44,64,79,84,86,95,96,98,99], 10))
 print(binary_search([5,6,10,13,14,18,30,34,35,37,40,44,64,79,84,86,95,96,98,99], 95))
 print(binary_search([5,6,10,13,14,18,30,34,35,37,40,44,64,79,84,86,95,96,98,99], 100))
+'''
+
+### Naive String Search: Find the recurrence of a substring in a string
+
+def sub_string(lg_str, sm_str):
+    count = 0
+    k = 0
+    for i in range(len(lg_str)):
+        for j in range(len(sm_str)):
+            if lg_str[i+k] != sm_str[j]:
+                break
+            else:
+                k += 1
+        if k == len(sm_str):
+            count += 1
+        k = 0
+    return count
 
 
-
-
-
-
-
+print(sub_string('myhellonameishelhoussemloandhelloagain','houssem'))
 
 
 
