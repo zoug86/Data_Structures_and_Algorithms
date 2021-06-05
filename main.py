@@ -174,6 +174,7 @@ function isPalindrome(temp){
 
 #--In Python--#
 
+'''
 new_str = ""
 
 def isPalindrome(str):
@@ -190,3 +191,75 @@ def isPalindrome(str):
     return isPalindrome(new_str)
 
 print(isPalindrome('amanaplanacanalpanama'))
+'''
+
+
+###### Second topic: Searching Algorithms - June 03 2021 ######
+
+           ###########Binary Search#############
+
+
+#--In JavaScript--#
+
+'''
+function binarySearch(arr, num){
+  // add whatever parameters you deem necessary - good luck!
+  let left = 0;
+  let right = arr.length - 1;
+  let mid = Math.floor((right + left )/ 2);
+ 
+  while(num !== arr[mid] && left <= right){
+      if(num > arr[mid]) left = mid + 1;
+      else right = mid - 1;
+      mid = Math.floor((right + left )/ 2);
+  }
+   return num === arr[mid] ? mid : -1;
+}
+'''
+
+#--In Python--#
+
+import math
+
+def binary_search(arr, num):
+    left = 0
+    right = len(arr) - 1
+    mid = math.floor((right + left) // 2)
+    while left <= right and num != arr[mid]:
+        if num > arr[mid]:
+            left = mid + 1
+        else:
+            right = mid - 1
+        mid = math.floor((right + left) // 2)
+    if num == arr[mid]:
+        return mid
+    return -1
+
+
+print(binary_search([1, 2, 3, 4, 5], 2))
+print(binary_search([1, 2, 3, 4, 5], 3))
+print(binary_search([1, 2, 3, 4, 5], 5))
+print(binary_search([1, 2, 3, 4, 5], 6))
+print(binary_search([5,6,10,13,14,18,30,34,35,37,40,44,64,79,84,86,95,96,98,99], 10))
+print(binary_search([5,6,10,13,14,18,30,34,35,37,40,44,64,79,84,86,95,96,98,99], 95))
+print(binary_search([5,6,10,13,14,18,30,34,35,37,40,44,64,79,84,86,95,96,98,99], 100))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
