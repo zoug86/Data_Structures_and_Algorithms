@@ -413,6 +413,7 @@ function SelectionSort(arr){
 
 #--In Python--#
 
+'''
 def selection_sort(arr):
     for i in range(len(arr)):
         lowest = i
@@ -428,3 +429,30 @@ def selection_sort(arr):
 
 
 print(selection_sort([0, 2, 34,22,10,19,17]))
+'''
+
+                            ###########Insertion Sort#############
+
+
+#--In JavaScript--#
+'''
+function SelectionSort(arr){
+    let temp;
+    for(let i = 0; i < arr.length; i++){
+        let i = lowest;
+        for(let j = i+1; j < arr.length ; j++){
+            if(arr[j] < arr[lowest]){
+                lowest = j;
+            }
+        }
+        if( i !== lowest){
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    return arr;
+}
+'''
+
+#--In Python--#
