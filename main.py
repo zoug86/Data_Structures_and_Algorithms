@@ -464,3 +464,69 @@ def insertion_sort(arr):
 
 print(insertion_sort([12, 11, 13, 5, 6]))
 '''
+
+                        ###########Merge Sort#############
+
+
+#--In JavaScript--#
+'''
+function Merge(arr1, arr2){
+    let n = arr1.length;
+    let m = arr2.length;
+    let i = 0;
+    let j = 0;
+    let k = 0;
+    let arr = [];
+
+    while(k < (n + m)){
+        if(arr1[i] < arr2[j] && (i < n)){
+            arr.push(arr1[i]);
+            i++;
+        } else{
+            arr.push(arr2[j]);
+            j++;
+        }
+        k++;
+    }
+    return arr;
+}
+
+Merge([1, 4, 5,8], [2, 3, 17]);
+'''
+
+#--In Python--#
+
+def merge(arr1, arr2):
+    n = len(arr1)
+    m = len(arr2)
+    arr = []
+    i = 0
+    j = 0
+    k = 0
+    while k < (n + m):
+        if (i < n) and (arr1[i] < arr2[j]):
+            arr.append(arr1[i])
+            i += 1
+        else:
+            arr.append(arr2[j])
+            j += 1
+        k += 1
+    return arr
+
+
+print(merge([1, 4, 5, 8], [2, 3, 17]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
