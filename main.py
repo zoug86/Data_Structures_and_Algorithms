@@ -369,8 +369,6 @@ function BubbleSort(arr){
 #--In Python--#
 
 '''
-
-'''
 def bubble_sort(arr):
 
     for i in range(len(arr), 0, -1):
@@ -387,3 +385,46 @@ def bubble_sort(arr):
 
 
 print(bubble_sort([12, 34, 5, 56, 11, 99, 123, 3, -12, 234, 11, 66, 11, 7789, 1234, 10, 1, -11, 123456, -1234]))
+'''
+
+                              ###########Selection Sort#############
+
+
+#--In JavaScript--#
+'''
+function SelectionSort(arr){
+    let temp;
+    for(let i = 0; i < arr.length; i++){
+        let i = lowest;
+        for(let j = i+1; j < arr.length ; j++){
+            if(arr[j] < arr[lowest]){
+                lowest = j;
+            }
+        }
+        if( i !== lowest){
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    return arr;
+}
+'''
+
+#--In Python--#
+
+def selection_sort(arr):
+    for i in range(len(arr)):
+        lowest = i
+        for j in range(i+1, len(arr)):
+            if arr[j] < arr[lowest]:
+                lowest = j
+        if i != lowest:
+            print(arr)
+            temp = arr[i]
+            arr[i] = arr[lowest]
+            arr[lowest] = temp
+    return arr
+
+
+print(selection_sort([0, 2, 34,22,10,19,17]))
