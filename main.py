@@ -436,23 +436,31 @@ print(selection_sort([0, 2, 34,22,10,19,17]))
 
 #--In JavaScript--#
 '''
-function SelectionSort(arr){
-    let temp;
-    for(let i = 0; i < arr.length; i++){
-        let i = lowest;
-        for(let j = i+1; j < arr.length ; j++){
-            if(arr[j] < arr[lowest]){
-                lowest = j;
-            }
+function InsertionSort(arr){
+    for(let i = 1; i < arr.length; i++){
+        let currentVal = arr[i];
+        for(let j = i-1; j >= 0 && arr[j] > currentVal ; j--){
+            arr[j+1] = arr[j];
         }
-        if( i !== lowest){
-            temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
+         arr[j+1] = currentVal;
     }
     return arr;
 }
 '''
 
 #--In Python--#
+
+'''
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        current_val = arr[i]
+        j = i - 1
+        while j >= 0 and current_val < arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = current_val
+    return arr
+
+
+print(insertion_sort([12, 11, 13, 5, 6]))
+'''
