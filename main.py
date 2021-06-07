@@ -475,18 +475,23 @@ function Merge(arr1, arr2){
     let m = arr2.length;
     let i = 0;
     let j = 0;
-    let k = 0;
     let arr = [];
 
-    while(k < (n + m)){
-        if(arr1[i] < arr2[j] && (i < n)){
+    while( (i < n) && (j < m)){
+        if(arr1[i] < arr2[j]){
             arr.push(arr1[i]);
             i++;
         } else{
             arr.push(arr2[j]);
             j++;
         }
-        k++;
+    while(i < n){
+        arr.push(arr1[i]);
+            i++;
+    }
+    while(j < m){
+        arr.push(arr2[j]);
+            j++;
     }
     return arr;
 }
@@ -502,19 +507,25 @@ def merge(arr1, arr2):
     arr = []
     i = 0
     j = 0
-    k = 0
-    while k < (n + m):
-        if (i < n) and (arr1[i] < arr2[j]):
+
+    while (i < n) and (j < m):
+        if arr1[i] < arr2[j]:
             arr.append(arr1[i])
             i += 1
         else:
             arr.append(arr2[j])
             j += 1
-        k += 1
+    while i < n:
+        arr.append(arr1[i])
+        i += 1
+    while j < m:
+        arr.append(arr2[j])
+        j += 1
+
     return arr
 
 
-print(merge([1, 4, 5, 8], [2, 3, 17]))
+print(merge([1, 4, 5, 20], [2, 3, 17]))
 
 
 
