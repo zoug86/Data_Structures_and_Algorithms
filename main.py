@@ -496,10 +496,16 @@ function Merge(arr1, arr2){
     return arr;
 }
 
-Merge([1, 4, 5,8], [2, 3, 17]);
+function mergeSort(arr){
+   if(arr.length === 1) return arr;
+   let mid = Math.floor(arr.length / 2);
+   let left = mergeSort(arr(
+}
 '''
 
 #--In Python--#
+
+import math
 
 def merge(arr1, arr2):
     n = len(arr1)
@@ -525,7 +531,16 @@ def merge(arr1, arr2):
     return arr
 
 
-print(merge([1, 4, 5, 20], [2, 3, 17]))
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = math.floor(len(arr)/2)
+    left_arr = merge_sort(arr[:mid])
+    right_arr = merge_sort(arr[mid:])
+    return merge(left_arr, right_arr)
+
+
+print(merge_sort([24, 10, 76, 73, 11]))
 
 
 
