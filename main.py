@@ -552,13 +552,42 @@ print(merge_sort([24, 10, 76, 73, 11]))
 
 #--In JavaScript--#
 '''
-
+function pivot(arr){
+   let piv = arr[0];
+   let piv_index = 0;
+   let temp;
+   for(let i = 1; i < arr.length; i++){
+        if(arr[i] < piv){
+            piv_index++;
+            temp = arr[piv_index];
+            arr[piv_index] = arr[i];
+            arr[i] = temp;
+        }
+   }
+   arr[0] = arr[piv_index];
+   arr[piv_index] - piv;
+   return piv_index;
+}
 '''
 
 #--In Python--#
 
 
+def pivot(arr):
+    piv = arr[0]
+    piv_index = 0
+    for i in range(1, len(arr)):
+        if arr[i] < piv:
+            piv_index += 1
+            temp = arr[piv_index]
+            arr[piv_index] = arr[i]
+            arr[i] = temp
+    arr[0] = arr[piv_index]
+    arr[piv_index] = piv
+    return piv_index
 
+
+print(pivot([9,4,8,2,1,5,7,6,3]))
 
 
 
