@@ -499,12 +499,15 @@ function Merge(arr1, arr2){
 function mergeSort(arr){
    if(arr.length === 1) return arr;
    let mid = Math.floor(arr.length / 2);
-   let left = mergeSort(arr(
+   let left = mergeSort(arr.slice(0, mid));
+   let right = mergeSort(arr.slice(mid));
+   return merge(left, right);
 }
 '''
 
 #--In Python--#
 
+'''
 import math
 
 def merge(arr1, arr2):
@@ -541,8 +544,18 @@ def merge_sort(arr):
 
 
 print(merge_sort([24, 10, 76, 73, 11]))
+'''
 
 
+                 ###########Quick Sort#############
+
+
+#--In JavaScript--#
+'''
+
+'''
+
+#--In Python--#
 
 
 
