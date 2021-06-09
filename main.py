@@ -552,11 +552,11 @@ print(merge_sort([24, 10, 76, 73, 11]))
 
 #--In JavaScript--#
 '''
-function pivot(arr){
-   let piv = arr[0];
-   let piv_index = 0;
+function pivot(arr, start, end){
+   let piv = arr[start];
+   let piv_index = start;
    let temp;
-   for(let i = 1; i < arr.length; i++){
+   for(let i = start + 1; i < end; i++){
         if(arr[i] < piv){
             piv_index++;
             temp = arr[piv_index];
@@ -568,26 +568,47 @@ function pivot(arr){
    arr[piv_index] - piv;
    return piv_index;
 }
+
+function quickSort(arr, left = 0, right = arr.length - 1){
+   if( left < right){
+     let pivotIndex = pivot(arr, left, right);
+     // left side of the partition
+     quickSort(arr, left, pivotIndex - 1);
+     // right side of the partition
+     quickSort(arr, pivotIndex + 1, right);
+   }
+   return arr;
+}
 '''
 
 #--In Python--#
 
 
-def pivot(arr):
-    piv = arr[0]
-    piv_index = 0
-    for i in range(1, len(arr)):
+def pivot(arr, start, end):
+    piv = arr[start]
+    piv_index = start
+    for i in range(start+1, end+1):
         if arr[i] < piv:
             piv_index += 1
             temp = arr[piv_index]
             arr[piv_index] = arr[i]
             arr[i] = temp
-    arr[0] = arr[piv_index]
+    arr[start] = arr[piv_index]
     arr[piv_index] = piv
+    #print(piv_index)
     return piv_index
 
 
-print(pivot([9,4,8,2,1,5,7,6,3]))
+def quick_sort(arr, left, right):
+    if left < right:
+        pivot_index = pivot(arr, left, right)
+        quick_sort(arr, left, pivot_index - 1)
+        quick_sort(arr, pivot_index + 1, right)
+    return arr
+
+arr1 = [4,8,2,1,0,-2]
+n = len(arr1)
+print(quick_sort(arr1, 0, n-1))
 
 
 
