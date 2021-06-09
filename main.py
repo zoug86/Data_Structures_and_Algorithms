@@ -583,7 +583,7 @@ function quickSort(arr, left = 0, right = arr.length - 1){
 
 #--In Python--#
 
-
+'''
 def pivot(arr, start, end):
     piv = arr[start]
     piv_index = start
@@ -609,13 +609,78 @@ def quick_sort(arr, left, right):
 arr1 = [4,8,2,1,0,-2]
 n = len(arr1)
 print(quick_sort(arr1, 0, n-1))
+'''
 
 
+                       ###########Radix Sort#############
 
 
+#--In JavaScript--#
+'''
+function getDigit(num, i){
+    return Math.floor(Math.abs(num) // Math.pow(10, i)) % 10;
+}
+
+function digitCount(num){
+    if(num === 0) return 1;
+    return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
+
+function mostDigits(arr){
+    let maxDigits = 0;
+    for(let i = 0; i < arr.length; i++){
+        maxDigits = max(maxDigits, digitCount(arr[i]));
+    }
+    return maxDigits;
+}
+
+function radixSort(arr):
+    maxDigit = mostDigits(arr);
+
+    for(let i = 0; i < maxDigit; i++){
+        let bucket = Array.from({length: 10}, () => []);
+        for(let j = 0; j < arr.length; j++){
+            let index = getDigit(arr[j], i);
+            bucket[index].push(arr[j]);
+        arr = [].concat(...bucket);
+    }
+    return arr;
+'''
+
+#--In Python--#
+
+import math
 
 
+def get_digit(num, i):
+    return math.floor(abs(num) // math.pow(10, i)) % 10
+
+def digit_count(num):
+    if num == 0:
+        return 1
+    return math.floor(math.log10(abs(num))) + 1
+
+def most_digits(arr):
+    max_digits = 0
+    for i in range(len(arr)):
+        max_digits = max(max_digits, digit_count(arr[i]))
+    return max_digits
+
+def radix_sort(arr):
+    max_digit = most_digits(arr)
+
+    for i in range(max_digit):
+        bucket = [[] for k in range(10)]
+        for j in range(len(arr)):
+            index = get_digit(arr[j], i)
+            bucket[index].append(arr[j])
+        arr = []
+        for k in range(len(bucket)):
+            if bucket[k]:
+                arr += bucket[k]
+    return arr
 
 
+print(radix_sort([10, 5, 123, 78, 2, 3456, 9999]))
 
 
