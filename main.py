@@ -649,6 +649,7 @@ function radixSort(arr):
 
 #--In Python--#
 
+'''
 import math
 
 
@@ -679,8 +680,95 @@ def radix_sort(arr):
             if bucket[k]:
                 arr += bucket[k]
     return arr
-
-
+    
 print(radix_sort([10, 5, 123, 78, 2, 3456, 9999]))
+'''
+
+###### Fourth topic: Sorting Algorithms - June 10 2021 ######
+
+            ###########Singly LinkedLists#############
+
+#--In JavaScript--#
+
+'''
+class Node{
+    constructor(val){
+      this.val = val;
+      this.next = null;
+    }
+}
+
+class SinglyLinkedList{
+  constructor(){
+     this.head = null;
+     this.tail = null;
+     this.length = 0;
+  }
+  // push method
+  push(val){
+    let newNode = new Node(val);
+    if(! this.head){
+       this.head = newNode;
+       this.tail = this.head;
+    } else{
+       this.tail.next = newNode;
+       this.tail = newNode;
+    }
+    this.length++;
+    return this;
+  
+  }
+
+}
+'''
+
+#--In Python--#
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.length = 0
+        self.head = None
+        self.tail = None
+
+    def push(self, val):
+        new_node = Node(val)
+        if not self.head:
+            self.head = new_node
+            self.tail = self.head
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
+        self.length += 1
+        return self
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
