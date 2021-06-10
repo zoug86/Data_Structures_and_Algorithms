@@ -716,8 +716,45 @@ class SinglyLinkedList{
     }
     this.length++;
     return this;
-  
   }
+   // unshift method
+  unshift(val){
+      let newNode = new Node(val);
+      if(!this.head){
+          this.head = newNode;
+          this.tail = this.head;
+      } else{
+          let currentHead = this.head;
+          newNode.next = currentHead;
+          this.head = newNode; 
+      }
+      this.length++;
+      return this;
+  }
+  // get method
+  get(index){
+      let count = 0;
+      let current = this.head;
+      if(index < 0 || index >=  this.length) return undefined;
+      else{
+          while(count < index){
+              current = current.next;
+              count++;
+          }
+      }
+      return current;
+  }
+    // set method
+  set(index, newVal){
+      let current = this.get(index)
+      if(current){
+          current.val = newVal;
+           return true;
+      }    
+      return false;
+  }
+
+  
 
 }
 '''
@@ -747,10 +784,62 @@ class SinglyLinkedList:
         self.length += 1
         return self
 
+    def pop(self):
+        if not self.head:
+            return "undefined"
+        current = self.head
+        new_tail = current
+        while current.next:
+            new_tail = current
+            current = current.next
+        self.tail = new_tail
+        self.tail.next = None
+        self.length -= 1
+        return current
+
+    def shift(self):
+        if not self.head:
+            return "undefined"
+        current_head = self.head
+        self.head = current_head.next
+        self.length -= 1
+        return current_head
+
+    def unshift(self, val):
+        new_node = Node(val)
+        if not self.head:
+            self.head = new_node
+        else:
+            new_node.next = self.head
+            self.head = new_node
+        self.length += 1
+        return self
+
+    def get(self, index):
+        if index < 0 or index >= self.length:
+            return 0 ## we want to return undefined
+        count = 0
+        current = self.head
+        while count < index:
+            current = current.next
+            count += 1
+        return current
+
+    def set(self, index, new_val):
+        current = self.get(index)
+        if current:
+            current.val = new_val
+            return True
+        return False
 
 
 
+list = SinglyLinkedList()
+list.push("Hello")
+list.push("GoodBye")
+list.push("!")
 
+print(list.set(6, 'hoss'))
 
 
 
