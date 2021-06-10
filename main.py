@@ -779,9 +779,24 @@ class SinglyLinkedList{
       this.length--;
       return deletedNode;
   }
-  
-  
-
+  // reverse method
+  reverse(){
+      if(this.length === 0) return undefined;
+      let count = 0;
+      let node = this.head;
+      this.head = this.tail;
+      this.tail = node;
+      let previousNode = null;
+      let nextNode;
+     
+      while(count < this.length){
+         nextNode = node.next;
+         node.next = previousNode;
+         previousNode = node;
+         node = nextNode;
+          count++;
+      }
+      return this;
 }
 '''
 
@@ -886,6 +901,22 @@ class SinglyLinkedList:
         previous_node.next = deleted_node.next
         self.length -= 1
         return deleted_node
+
+    def reverse(self):
+        if self.length == 0:
+            return "undefined"
+        node = self.head
+        self.head = self.tail
+        self.tail = node
+        previous_node = None
+        count = 0
+        while count < self.length:
+            next_node = node.next
+            node.next = previous_node
+            previous_node = node
+            node = next_node
+        return self
+
 
 list = SinglyLinkedList()
 
