@@ -753,7 +753,33 @@ class SinglyLinkedList{
       }    
       return false;
   }
+  // insert method
+  insert(index, val){
+      if(index < 0 || index > this.length) return false;
+      if(index === this.length) return !!this.push(val);
+      if(index === 0) return !!this.unshift(val);
 
+      let newNode = new Node(val);
+      let previous = this.get(index - 1);
+      let temp = previous.next;
+      previous.next = newNode;
+      newNode.next = temp;
+      this.length++;
+      return true;
+  }
+  // remove method
+  remove(index){
+      if(index < 0 || index >= this.length) return false;
+      if(index === this.length - 1) return !!this.pop();
+      if(index === 0) return !!this.shift();
+
+      let previous = this.get(index - 1);
+      let deletedNode = previous.next;
+      previous.next = deletedNode.next;
+      this.length--;
+      return deletedNode;
+  }
+  
   
 
 }
@@ -832,14 +858,47 @@ class SinglyLinkedList:
             return True
         return False
 
+    def insert(self, index, val):
+        if index < 0 or index > self.length:
+            return "undefined"
+        if index == self.length:
+            return not not self.push(val)
+        if index == 0:
+            return not not self.unshift(val)
+        new_node = Node(val)
+        previous = self.get(index - 1)
+        temp = previous.next
+        previous.next = new_node
+        new_node.next = temp
+        self.length += 1
+        return True
 
+    def remove(self, index):
+        if index < 0 or index > self.length:
+            return "undefined"
+        if index == self.length - 1:
+            return self.pop()
+        if index == 0:
+            return self.shift()
+
+        previous_node = self.get(index - 1)
+        deleted_node = previous_node.next
+        previous_node.next = deleted_node.next
+        self.length -= 1
+        return deleted_node
 
 list = SinglyLinkedList()
-list.push("Hello")
-list.push("GoodBye")
-list.push("!")
 
-print(list.set(6, 'hoss'))
+list.push(1)
+list.push(2)
+list.push(3)
+list.push(4)
+list.push(5)
+
+#print(list.insert(4, 'houssem'))
+#print(list.length)
+print(list.remove(2).val)
+print(list.length)
 
 
 
