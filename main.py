@@ -1016,7 +1016,37 @@ class DoublyLinkedList{
     this.length++;
     return this;
   }
-  
+  // get method: accessing a node in DLL by its position
+  get(index){
+    if(index < 0 || index >= this.length){
+      return null;
+    }
+    
+    if(index <= this.length / 2){
+      let nextNode = this.head;
+      let count = 0;
+      while(count < this.length / 2){
+        if(count === index){
+          return nextNode.val;
+        }
+        nextNode = nextNode.next;
+        count++;
+      }
+    }
+    
+    if(index > this.length / 2){
+      let prevNode = this.tail;
+      let count = this.length - 1;
+      while(count > this.length / 2){
+        if(count === index){
+          return prevNode.val;
+        }
+        prevNode = prevNode.prev;
+        count--;
+      }
+    }
+    
+  }
   
   
 }
@@ -1088,6 +1118,28 @@ class DoublyLinkedList:
         self.length += 1
         return self
 
+    def get(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        if index <= self.length / 2:
+            next_node = self.head
+            count = 0
+            while count < self.length / 2:
+                if count == index:
+                    return next_node.val
+                next_node = next_node.next
+                count += 1
+
+        if index > self.length / 2:
+            prev_node = self.tail
+            count = self.length - 1
+            while count > self.length / 2:
+                if count == index:
+                    return prev_node.val
+                prev_node = prev_node.prev
+                count -= 1
+
+
 list = DoublyLinkedList()
 
 list.push(1)
@@ -1095,8 +1147,8 @@ list.push(2)
 list.push(3)
 list.push(4)
 list.push(5)
-list.unshift(10)
-list.unshift(99)
+#list.unshift(10)
+#list.unshift(99)
 
 #print(list.insert(4, 'houssem'))
 #print(list.length)
@@ -1104,7 +1156,8 @@ list.unshift(99)
 #print(list.head.next.prev.val)
 #print(list.pop().val)
 #print(list.shift().val)
-print(list.head.val)
+#print(list.head.val)
+print(list.get(1))
 print(list.length)
 
 
