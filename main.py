@@ -1049,6 +1049,20 @@ class DoublyLinkedList{
      }
      return false;
   }
+  // insert method: adding a node in DLL by a certain position
+  insert(val, index){
+    let newNode = new Node(val);
+    if(index < 0 || index > this.length) return false;
+    if(index === 0) return !!this.unshift(val);
+    if(index === this.length) return !!this.push(val);
+    let prevNode = this.get(index - 1);
+    newNode.prev = prevNode;
+    newNode.next = prevNode.next;
+    prevNode.next.prev = newNode
+    prevNode.next = newNode;
+    this.length++;
+    return true;
+  }
   
   
 }
@@ -1145,6 +1159,23 @@ class DoublyLinkedList:
             return True
         return False
 
+    def insert(self, val, index):
+        new_node = Node(val)
+        if index < 0 or index > self.length:
+            return False
+        if index == 0:
+            return not not self.unshift(val)
+        if index == self.length:
+            return not not self.push(val)
+        prev_node = self.get(index - 1)
+        new_node.prev = prev_node
+        new_node.next = prev_node.next
+        prev_node.next.prev = new_node
+        prev_node.next = new_node
+        self.length += 1
+        return True
+
+
 
 
 list = DoublyLinkedList()
@@ -1156,7 +1187,7 @@ list.push(4)
 list.push(5)
 #list.unshift(10)
 #list.unshift(99)
-
+list.insert(99, 4)
 #print(list.insert(4, 'houssem'))
 #print(list.length)
 #print(list.remove(2).val)
@@ -1165,7 +1196,7 @@ list.push(5)
 #print(list.shift().val)
 #print(list.head.val)
 #print(list.get(4))
-print(list.set(6, 0))
+#print(list.set(6, 0))
 print(list.length)
 print(list.head.val)
 
