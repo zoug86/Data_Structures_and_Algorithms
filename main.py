@@ -684,9 +684,9 @@ def radix_sort(arr):
 print(radix_sort([10, 5, 123, 78, 2, 3456, 9999]))
 '''
 
-###### Fourth topic: Sorting Algorithms - June 10 2021 ######
+###### Fourth topic: Data Structures - June 10 2021 ######
 
-            ###########Singly LinkedLists#############
+    ##1##     ###########Singly LinkedLists#############
 
 #--In JavaScript--#
 
@@ -802,6 +802,7 @@ class SinglyLinkedList{
 
 #--In Python--#
 
+'''
 class Node:
     def __init__(self, val):
         self.val = val
@@ -930,18 +931,74 @@ list.push(5)
 #print(list.length)
 print(list.remove(2).val)
 print(list.length)
+'''
+
+
+
+                    ##2##     ###########Doubly LinkedLists############# June 19 2021
+
+
+#--In JavaScript--#
+
+'''
+class Node{
+    constructor(val){
+      this.val = val;
+      this.next = null;
+      this.prev = null;
+    }
+}
+
+class DoublyLinkedList{
+  constructor(){
+     this.head = null;
+     this.tail = null;
+     this.length = 0;
+  }
+'''
+
+
+#--In Python--#
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+        self.prev = 0
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.length = 0
+
+    def push(self, val):
+        new_node = Node(val)
+        if not self.head:
+            self.head = new_node
+            self.tail = self.head
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+        self.length += 1
+        return self
 
 
 
 
+list = DoublyLinkedList()
 
+list.push(1)
+list.push(2)
+list.push(3)
+list.push(4)
+list.push(5)
 
-
-
-
-
-
-
+#print(list.insert(4, 'houssem'))
+#print(list.length)
+#print(list.remove(2).val)
+print(list.head.next.val)
 
 
 
