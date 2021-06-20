@@ -1002,7 +1002,24 @@ class DoublyLinkedList{
     this.length--;
     return oldHead;
   }
+   // unshift method: adding a node at the beginning of the DLL
+  unshift(val){
+    let newNode = new Node(val);
+    if(this.length === 0){
+      this.head = newNode;
+      this.tail = newNode;
+    } else{
+      this.head.prev = newNode;
+      newNode.next = this.head;
+      this.head = newNode
+    }
+    this.length++;
+    return this;
+  }
   
+  
+  
+}
 '''
 
 #--In Python--#
@@ -1059,6 +1076,17 @@ class DoublyLinkedList:
         self.length -= 1
         return old_head
 
+    def unshift(self, val):
+        new_node = Node(val)
+        if self.length == 0:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.head.prev = new_node
+            new_node.next = self.head
+            self.head = new_node
+        self.length += 1
+        return self
 
 list = DoublyLinkedList()
 
@@ -1067,14 +1095,16 @@ list.push(2)
 list.push(3)
 list.push(4)
 list.push(5)
+list.unshift(10)
+list.unshift(99)
 
 #print(list.insert(4, 'houssem'))
 #print(list.length)
 #print(list.remove(2).val)
 #print(list.head.next.prev.val)
 #print(list.pop().val)
-print(list.shift().val)
-
+#print(list.shift().val)
+print(list.head.val)
 print(list.length)
 
 
