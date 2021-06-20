@@ -1029,7 +1029,7 @@ class DoublyLinkedList{
           nextNode = nextNode.next;
           count++;
       }  
-       return nextNode.val;
+       return nextNode;
     } else{
         let prevNode = this.tail;
         let count = this.length - 1;
@@ -1037,8 +1037,17 @@ class DoublyLinkedList{
           prevNode = prevNode.prev;
           count--;
         }
-        return prevNode.val;  
+        return prevNode;  
       }
+  }
+  // set method: replacing the value of a node at a specific position
+  set(val, index){
+     let node = this.get(index);
+     if(node){
+       node.val = val;
+       return true;
+     }
+     return false;
   }
   
   
@@ -1120,14 +1129,22 @@ class DoublyLinkedList:
             while count != index:
                 next_node = next_node.next
                 count += 1
-            return next_node.val
+            return next_node
         else:
             prev_node = self.tail
             count = self.length - 1
             while count != index:
                 prev_node = prev_node.prev
                 count -= 1
-            return prev_node.val
+            return prev_node
+
+    def set(self, val, index):
+        node = self.get(index)
+        if node:
+            node.val = val
+            return True
+        return False
+
 
 
 list = DoublyLinkedList()
@@ -1147,9 +1164,10 @@ list.push(5)
 #print(list.pop().val)
 #print(list.shift().val)
 #print(list.head.val)
-print(list.get(4))
+#print(list.get(4))
+print(list.set(6, 0))
 print(list.length)
-
+print(list.head.val)
 
 
 
