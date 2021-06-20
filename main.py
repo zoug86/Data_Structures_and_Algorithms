@@ -934,7 +934,6 @@ print(list.length)
 '''
 
 
-
                     ##2##     ###########Doubly LinkedLists############# June 19 2021
 
 
@@ -955,8 +954,41 @@ class DoublyLinkedList{
      this.tail = null;
      this.length = 0;
   }
+  
+  // push method: adding a node to the end of the DLL
+  push(val){
+    let newNode = new Node(val);
+    if(!this.head){
+      this.head = newNode;
+      this.tail = this.head;
+    } else{
+      this.tail.next = newNode;
+      newNode.prev = this.tail;
+      this.tail = newNode;
+    }
+     this.length++;
+     return this;
+  }
+  // pop method: deleting the last item (the tail) and return it
+  pop(){
+    if(this.length === 0){
+      return undefined;
+    }
+    let currentTail = this.tail;
+    if(this.length === 1){
+      this.head = null;
+      this.tail = null;
+      this.length--;
+      return currentTail;
+    }
+    this.tail = currentTail.prev;
+    this.tail.next = null;
+    currentTail.prev = null;
+    this.length--;
+    return currentTail;
+  }
+  
 '''
-
 
 #--In Python--#
 
@@ -984,7 +1016,19 @@ class DoublyLinkedList:
         self.length += 1
         return self
 
-
+    def pop(self):
+        if self.length == 0:
+            return "undefined"
+        current_tail = self.tail
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = current_tail.prev
+            self.tail.next = None
+            current_tail.prev = None
+        self.length -= 1
+        return current_tail
 
 
 list = DoublyLinkedList()
@@ -998,8 +1042,13 @@ list.push(5)
 #print(list.insert(4, 'houssem'))
 #print(list.length)
 #print(list.remove(2).val)
-print(list.head.next.val)
-
+#print(list.head.next.prev.val)
+print(list.pop().val)
+print(list.pop().val)
+print(list.pop().val)
+print(list.pop().val)
+#print(list.pop().val)
+print(list.length)
 
 
 
