@@ -987,6 +987,21 @@ class DoublyLinkedList{
     this.length--;
     return currentTail;
   }
+  // shift method: removes a node from the beginning of DLL
+  shift(){
+    if(!this.head) return undefined;
+    let oldHead = this.head;
+    if(this.length === 1){
+      this.head = null;
+      this.tail = null;
+    } else{
+      this.head = oldHead.next;
+      this.head.prev = null;
+      oldHead.next = null;
+    }
+    this.length--;
+    return oldHead;
+  }
   
 '''
 
@@ -1030,6 +1045,20 @@ class DoublyLinkedList:
         self.length -= 1
         return current_tail
 
+    def shift(self):
+        if self.length == 0:
+            return "undefined"
+        old_head = self.head
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = old_head.next
+            self.head.prev = None
+            old_head.next = None
+        self.length -= 1
+        return old_head
+
 
 list = DoublyLinkedList()
 
@@ -1043,11 +1072,9 @@ list.push(5)
 #print(list.length)
 #print(list.remove(2).val)
 #print(list.head.next.prev.val)
-print(list.pop().val)
-print(list.pop().val)
-print(list.pop().val)
-print(list.pop().val)
 #print(list.pop().val)
+print(list.shift().val)
+
 print(list.length)
 
 
