@@ -1025,27 +1025,20 @@ class DoublyLinkedList{
     if(index <= this.length / 2){
       let nextNode = this.head;
       let count = 0;
-      while(count < this.length / 2){
-        if(count === index){
-          return nextNode.val;
+      while(count !== index){
+          nextNode = nextNode.next;
+          count++;
+      }  
+       return nextNode.val;
+    } else{
+        let prevNode = this.tail;
+        let count = this.length - 1;
+        while(count !== index){
+          prevNode = prevNode.prev;
+          count--;
         }
-        nextNode = nextNode.next;
-        count++;
+        return prevNode.val;  
       }
-    }
-    
-    if(index > this.length / 2){
-      let prevNode = this.tail;
-      let count = this.length - 1;
-      while(count > this.length / 2){
-        if(count === index){
-          return prevNode.val;
-        }
-        prevNode = prevNode.prev;
-        count--;
-      }
-    }
-    
   }
   
   
@@ -1124,20 +1117,17 @@ class DoublyLinkedList:
         if index <= self.length / 2:
             next_node = self.head
             count = 0
-            while count < self.length / 2:
-                if count == index:
-                    return next_node.val
+            while count != index:
                 next_node = next_node.next
                 count += 1
-
-        if index > self.length / 2:
+            return next_node.val
+        else:
             prev_node = self.tail
             count = self.length - 1
-            while count > self.length / 2:
-                if count == index:
-                    return prev_node.val
+            while count != index:
                 prev_node = prev_node.prev
                 count -= 1
+            return prev_node.val
 
 
 list = DoublyLinkedList()
@@ -1157,7 +1147,7 @@ list.push(5)
 #print(list.pop().val)
 #print(list.shift().val)
 #print(list.head.val)
-print(list.get(1))
+print(list.get(4))
 print(list.length)
 
 
