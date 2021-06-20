@@ -1063,7 +1063,19 @@ class DoublyLinkedList{
     this.length++;
     return true;
   }
-  
+  // remove method
+  remove(index){
+    if(index < 0 || index >= this.length) return undefined;
+    if(index === 0) return this.shift();
+    if(index === this.length - 1) return this.pop();
+    let deletedNode = this.get(index);
+    deletedNode.prev.next = deletedNode.next;
+    deletedNode.next.prev = deletedNode.prev;
+    deletedNode.prev = null;
+    deletedNode.next = null;
+    this.length--;
+    return deletedNode;
+  }
   
 }
 '''
@@ -1175,7 +1187,18 @@ class DoublyLinkedList:
         self.length += 1
         return True
 
-
+    def remove(self, index):
+        if index < 0 or index >= self.length:
+            return "undefined"
+        if index == 0:
+            return self.shift()
+        if index == self.length - 1:
+            return self.push()
+        deleted_node = self.get(index)
+        deleted_node.prev.next = deleted_node.next
+        deleted_node.next.prev = deleted_node.prev
+        self.length -= 1
+        return deleted_node
 
 
 list = DoublyLinkedList()
@@ -1187,7 +1210,8 @@ list.push(4)
 list.push(5)
 #list.unshift(10)
 #list.unshift(99)
-list.insert(99, 4)
+#list.insert(99, 4)
+print(list.remove(0).val)
 #print(list.insert(4, 'houssem'))
 #print(list.length)
 #print(list.remove(2).val)
