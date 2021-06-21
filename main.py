@@ -1082,6 +1082,7 @@ class DoublyLinkedList{
 
 #--In Python--#
 
+'''
 class Node:
     def __init__(self, val):
         self.val = val
@@ -1223,10 +1224,115 @@ print(list.remove(0).val)
 #print(list.set(6, 0))
 print(list.length)
 print(list.head.val)
+'''
 
 
+                ##3##     ###########Stacks + Queues############# June 20 2021
+
+##STACKS##
+
+# --In JavaScript--#
+
+'''
+class Node{
+    constructor(val){
+        this.val = val;
+        this.next = null;
+    }
+}
+
+class Stack{
+    constructor(){
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+    }
+     // push here is similar to unshift in Single Linked Lists
+    push(val){
+        let newNode = new Node(val);
+        if(this.size === 0){
+            this.first = newNode;
+            this.last = newNode;
+        }else{
+            let current = this.first;
+            this.first = newNode;
+            newNode.next = current;
+        }
+        return this.size++;
+    }
+     // pop here is similar to shift in Single Linked Lists
+    pop(){
+        if(!this.first) return null;
+        let current = this.first;
+        if(this.size === 1){
+            this.last = null;
+        }
+        this.first = current.next;
+        this.size--;
+        return current.val;
+    }
+}
 
 
+let list = new Stack();
+
+list.push(1);
+list.push(2);
+list.push(3);
+list.push(4);
+list.push(5);
+}
+
+'''
+
+# --In Python--#
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class Stack:
+    def __init__(self):
+        self.first = None
+        self.last = None
+        self.size = 0
+
+    def push(self, val):
+        new_node = Node(val)
+        if self.size == 0:
+            self.first = new_node
+            self.last = new_node
+        else:
+            current = self.first
+            self.first = new_node
+            new_node.next = current
+        self.size += 1
+        return self.size
+
+    def pop(self):
+        if self.size == 0:
+            return None
+        if self.size == 1:
+            self.last = None
+        current = self.first
+        self.first = current.next
+        self.size -= 1
+        return current.val
 
 
+list = Stack()
+
+list.push(1)
+list.push(2)
+list.push(3)
+list.push(4)
+list.push(5)
+
+print(list.pop())
+print(list.pop())
+print(list.pop())
+print(list.pop())
+print(list.pop())
+print(list.pop())
 
