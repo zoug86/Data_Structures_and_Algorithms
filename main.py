@@ -1393,6 +1393,7 @@ list.enqueue(5);
 
 # --In Python--#
 
+'''
 class Node:
     def __init__(self, val):
         self.val = val
@@ -1434,3 +1435,107 @@ list.enqueue(2)
 list.enqueue(3)
 list.enqueue(4)
 print(list.dequeue())
+'''
+
+
+            ##4##     ###########BINARY SEARCH TREES############# June 20 2021
+
+# --In JavaScript--#
+'''
+class Node{
+    constructor(val){
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class BinarySearchTree{
+    constructor(){
+        this.root = null;
+    }
+
+    insert(val){
+        let newNode = new Node(val);
+        
+        if(!this.root){
+            this.root = newNode;
+        } else{
+            let current = this.root;
+            while(true){
+                if(val < current.val){
+                    if(current.left === null){
+                        current.left = newNode;
+                        return this;
+                    }
+                        current = current.left;
+                } else if(val > current.val){
+                    if(current.right === null){
+                        current.right = newNode;
+                        return this;
+                    }
+                         current = current.right;
+                  } else{
+                      return undefined;
+                  }
+             }
+         }
+    }
+    find(){
+    
+}
+
+
+let newBst = new BinarySearchTree();
+
+newBst.insert(10);
+newBst.insert(5);
+newBst.insert(2);
+newBst.insert(7);
+newBst.insert(13);
+newBst.insert(11);
+newBst.insert(16);
+'''
+
+# --In Python--#
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+class binary_search_tree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, val):
+        new_node = Node(val)
+        if not self.root:
+            self.root = new_node
+        else:
+            current = self.root
+            while True:
+                if val < current.val:
+                    if not current.left:
+                        current.left = new_node
+                        return self
+                    current = current.left
+                elif val > current.val:
+                    if not current.right:
+                        current.right = new_node
+                        return self
+                    current = current.right
+                else:
+                    return "undefined"
+
+new_bst = binary_search_tree()
+new_bst.insert(10)
+new_bst.insert(5)
+new_bst.insert(2)
+new_bst.insert(7)
+new_bst.insert(13)
+new_bst.insert(11)
+new_bst.insert(16)
+
+print(new_bst.root.left.left.left)
