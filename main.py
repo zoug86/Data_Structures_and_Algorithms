@@ -1287,6 +1287,7 @@ list.push(5);
 
 # --In Python--#
 
+'''
 class Node:
     def __init__(self, val):
         self.val = val
@@ -1335,4 +1336,101 @@ print(list.pop())
 print(list.pop())
 print(list.pop())
 print(list.pop())
+'''
 
+##QUEUES##
+
+# --In JavaScript--#
+
+'''
+class Node{
+    constructor(val){
+        this.val = val;
+        this.next = null;
+    }
+}
+
+class Queue{
+    constructor(){
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+    }
+    enqueue(val){
+        let newNode = new Node(val);
+     if(this.size === 0){
+         this.first = newNode;
+         this.last = newNode;
+     } else{
+         let currentLast = this.last;
+         this.last = newNode;
+         currentLast.next = newNode;
+     }
+     return this.size++;
+
+    }
+    dequeue(){
+      if(this.size === 0) return null;
+      if(this.size === 1){
+          this.last = null;
+      }
+      let current = this.first;
+      this.first = current.next;
+      this.size--;
+      return current.val;
+    }
+}
+
+
+let list = new Queue();
+
+list.enqueue(1);
+list.enqueue(2);
+list.enqueue(3);
+list.enqueue(4);
+list.enqueue(5);
+'''
+
+# --In Python--#
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class Queue:
+    def __init__(self):
+        self.first = None
+        self.last = None
+        self.size = 0
+
+    def enqueue(self, val):
+        new_node = Node(val)
+        if self.size == 0:
+            self.first = new_node
+            self.last = new_node
+        else:
+            current_last = self.last
+            self.last = new_node
+            current_last.next = new_node
+        self.size += 1
+        return self.size
+
+    def dequeue(self):
+        if self.size == 0:
+            return None
+        if self.size == 1:
+            self.last = None
+        current = self.first
+        self.first = current.next
+        self.size -= 1
+        return current.val
+
+
+list = Queue()
+
+list.enqueue(1)
+list.enqueue(2)
+list.enqueue(3)
+list.enqueue(4)
+print(list.dequeue())
