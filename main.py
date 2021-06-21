@@ -797,6 +797,7 @@ class SinglyLinkedList{
           count++;
       }
       return this;
+  }
 }
 '''
 
@@ -1481,7 +1482,25 @@ class BinarySearchTree{
              }
          }
     }
-    find(){
+    find(val){
+        if(!this.root) return false;
+        let current = this.root;
+            while(true){
+                if(val < current.val){
+                    if(current.left === null){
+                        return false;
+                    }
+                        current = current.left;
+                } else if(val > current.val){
+                    if(current.right === null){
+                        return false;
+                    }
+                         current = current.right;
+                  } else{
+                      return true;
+                  }
+             }
+    }
     
 }
 
@@ -1529,6 +1548,24 @@ class binary_search_tree:
                 else:
                     return "undefined"
 
+    def find(self, val):
+        if not self.root:
+            return False
+        else:
+            current = self.root
+            while True:
+                if val < current.val:
+                    if not current.left:
+                        return False
+                    current = current.left
+                elif val > current.val:
+                    if not current.right:
+                        return False
+                    current = current.right
+                else:
+                    return True
+
+
 new_bst = binary_search_tree()
 new_bst.insert(10)
 new_bst.insert(5)
@@ -1538,4 +1575,6 @@ new_bst.insert(13)
 new_bst.insert(11)
 new_bst.insert(16)
 
-print(new_bst.root.left.left.left)
+#print(new_bst.root.left.left.left)
+
+print(new_bst.find(99))
