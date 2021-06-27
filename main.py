@@ -1501,6 +1501,20 @@ class BinarySearchTree{
                   }
              }
     }
+    ##Breadth First Search##
+    BFS(){
+       let queue = [];
+        let data = [];
+        let node = this.root;
+        queue.push(node);
+        while(queue.length){
+            node = queue.shift()
+            data.push(node.val);
+            if(node.left) queue.push(node.left);
+            if(node.right) queue.push(node.right)
+        }
+        return data;
+    }
     
 }
 
@@ -1517,6 +1531,7 @@ newBst.insert(16);
 '''
 
 # --In Python--#
+
 
 class Node:
     def __init__(self, val):
@@ -1564,17 +1579,31 @@ class binary_search_tree:
                     current = current.right
                 else:
                     return True
+    # Breadth First Search
+    def BFS(self):
+        queue = []
+        data = []
+        node = self.root
+        queue.append(node)
+        while len(queue):
+            node = queue.pop(0)
+            data.append(node.val)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        return data
 
 
-new_bst = binary_search_tree()
-new_bst.insert(10)
-new_bst.insert(5)
-new_bst.insert(2)
-new_bst.insert(7)
-new_bst.insert(13)
-new_bst.insert(11)
-new_bst.insert(16)
+newBst = binary_search_tree()
+newBst.insert(10);
+newBst.insert(6);
+newBst.insert(15);
+newBst.insert(3);
+newBst.insert(8);
+newBst.insert(20);
 
 #print(new_bst.root.left.left.left)
 
-print(new_bst.find(99))
+print(newBst.BFS())
+
