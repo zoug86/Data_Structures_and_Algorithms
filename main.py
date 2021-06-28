@@ -1527,6 +1527,18 @@ class BinarySearchTree{
         preOrder(current);
         return data; 
     }
+    // Depth First Search: PostOrder
+    DFSPostorder(){
+        let data = [];
+        let current = this.root;
+        function postOrder(node){
+            if(node.left) postOrder(node.left);
+            if(node.right) postOrder(node.right);
+             data.push(node.val);
+        }
+        postOrder(current);
+        return data; 
+    }
     
 }
 
@@ -1619,6 +1631,20 @@ class binary_search_tree:
         pre_order(current)
         return data
 
+    # Depth First Search: PostOrder
+    def DFS_postorder(self):
+        data = []
+        current = self.root
+        def post_order(node):
+            if node.left:
+                post_order(node.left)
+            if node.right:
+                post_order(node.right)
+            data.append(node.val)
+        post_order(current)
+        return data
+
+
 
 newBst = binary_search_tree()
 newBst.insert(10)
@@ -1630,5 +1656,6 @@ newBst.insert(20)
 
 #print(new_bst.root.left.left.left)
 
-print(newBst.DFS())
+#print(newBst.DFS_preorder())
+print(newBst.DFS_postorder())
 
