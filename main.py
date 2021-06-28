@@ -1567,8 +1567,7 @@ newBst.insert(16);
 '''
 
 # --In Python--#
-
-
+'''
 class Node:
     def __init__(self, val):
         self.val = val
@@ -1685,4 +1684,71 @@ newBst.insert(20)
 #print(newBst.DFS_preorder())
 #print(newBst.DFS_postorder())
 print(newBst.DFS_inorder())
+'''
 
+
+                 ##5##     ###########BINARY HEAPS############# June 28 2021
+
+# --In JavaScript--#
+'''
+class MaxBinaryHeap{
+    constructor(){
+        this.values = [];
+    }
+    insert(val){
+        this.values.push(val);
+        let index = this.values.length - 1;
+        let parentIndex = Math.floor((index - 1)/2);
+        while(this.values[parentIndex] < this.values[index] && index > 0){
+            let temp = this.values[index];
+            this.values[index] = this.values[parentIndex];
+            this.values[parentIndex] = temp;
+            index = parentIndex;
+            parentIndex = Math.floor((index - 1)/2);
+        }
+        return this.values;
+    }
+}
+
+
+let heap = new MaxBinaryHeap();
+
+heap.insert(41);
+heap.insert(39);
+heap.insert(33);
+heap.insert(18);
+heap.insert(27);
+heap.insert(12);
+'''
+
+# --In Python--#
+import math
+class max_binary_heap:
+    def __init__(self):
+        self.values = []
+
+    def insert(self, val):
+        self.values.append(val)
+        index = len(self.values) - 1
+        parent_index = math.floor((index-1)/2)
+        while (self.values[parent_index] < self.values[index]) and index > 0:
+            temp = self.values[index]
+            self.values[index] = self.values[parent_index]
+            self.values[parent_index] = temp
+            index = parent_index
+            parent_index = math.floor((index - 1) / 2)
+        return self.values
+
+
+heap = max_binary_heap()
+heap.insert(41)
+heap.insert(39)
+heap.insert(33)
+heap.insert(18)
+heap.insert(27)
+heap.insert(12)
+heap.insert(55)
+heap.insert(1)
+heap.insert(100)
+
+print(heap.values)
