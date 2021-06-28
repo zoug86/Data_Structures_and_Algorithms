@@ -1515,6 +1515,18 @@ class BinarySearchTree{
         }
         return data;
     }
+     // Depth First Search: PreOrder
+    DFSPreorder(){
+        let data = [];
+        let current = this.root;
+        function preOrder(node){
+            data.push(node.val);
+            if(node.left) preOrder(node.left);
+            if(node.right) preOrder(node.right);
+        }
+        preOrder(current);
+        return data; 
+    }
     
 }
 
@@ -1581,7 +1593,7 @@ class binary_search_tree:
                     return True
     # Breadth First Search
     def BFS(self):
-        queue = []
+        queue = []  # implemented an array type queue
         data = []
         node = self.root
         queue.append(node)
@@ -1594,16 +1606,29 @@ class binary_search_tree:
                 queue.append(node.right)
         return data
 
+    # Depth First Search: PreOrder
+    def DFS_preorder(self):
+        data = []
+        current = self.root
+        def pre_order(node):
+            data.append(node.val)
+            if node.left:
+                pre_order(node.left)
+            if node.right:
+                pre_order(node.right)
+        pre_order(current)
+        return data
+
 
 newBst = binary_search_tree()
-newBst.insert(10);
-newBst.insert(6);
-newBst.insert(15);
-newBst.insert(3);
-newBst.insert(8);
-newBst.insert(20);
+newBst.insert(10)
+newBst.insert(6)
+newBst.insert(15)
+newBst.insert(3)
+newBst.insert(8)
+newBst.insert(20)
 
 #print(new_bst.root.left.left.left)
 
-print(newBst.BFS())
+print(newBst.DFS())
 
