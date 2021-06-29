@@ -1695,46 +1695,60 @@ class MaxBinaryHeap{
     constructor(){
         this.values = [];
     }
-    insert(val){
+   insert(val){
         this.values.push(val);
         let index = this.values.length - 1;
-        let parentIndex = Math.floor((index - 1)/2);
-        while(this.values[parentIndex] < this.values[index] && index > 0){
-            let temp = this.values[index];
-            this.values[index] = this.values[parentIndex];
-            this.values[parentIndex] = temp;
+        const element = this.values[index];
+        while(index > 0){
+            let parentIndex = Math.floor((index - 1)/2);
+            let parent =  this.values[parentIndex];
+            if(parent >= element) break;
+            this.values[parentIndex] = element;
+            this.values[index] = parent;
             index = parentIndex;
-            parentIndex = Math.floor((index - 1)/2);
         }
         return this.values;
     }
-     // this is a remove method ( to remove the max element)
+    // this is a remove method ( to remove the max element or root)
     extractMax(){
-        let max = this.values[0];
-        let end = this.values[this.values.length - 1];
-        this.values[this.values.length - 1] = max;
-        this.values[0] = end;
-        max = this.values.pop();
-        let parentIndex = 0;
-        let leftChildIndex = parentIndex * 2 + 1;
-        let rightChikdIndex = parentIndex * 2 + 2;
-        let element = this.values[0];
-        while(this.values[leftChildIndex] > element || this.values[rightChikdIndex] > element){
-                element = this.values[parentIndex] 
-                if(this.values[leftChildIndex] < this.values[rightChikdIndex]){
-                  this.values[parentIndex] = this.values[rightChikdIndex];
-                  this.values[rightChikdIndex] = element;
-                  parentIndex = rightChikdIndex;
-                } else{
-                  this.values[parentIndex] = this.values[leftChildIndex];
-                  this.values[leftChildIndex] = element;
-                  parentIndex = leftChildIndex;
-                }
-            leftChildIndex = parentIndex * 2 + 1;
-            rightChikdIndex = parentIndex * 2 + 2;
+        const max = this.values[0];
+        const end = this.values.pop();
+        if(this.values.length > 0){
+            this.values[0] = end;
+            this.sinkDown();
         }
         return max;
     }
+    sinkDown(){
+        let idx = 0;
+        const length = this.values.length;
+        const element = this.values[0];
+        
+        while(true){
+             let leftChildIndex = 2*idx + 1;
+             let rightChildIndex = 2*idx + 2;
+             let leftChild, rightChild;
+             let swap = null;
+             if(leftChildIndex < length){
+                 leftChild = this.values[leftChildIndex];
+                 if(leftChild > element){
+                     swap = leftChildIndex;
+                 }
+             }
+             if(rightChildIndex < length){
+                 rightChild = this.values[rightChildIndex];
+                 if((swap === null && rightChild > element) ||
+                  (swap !== null && rightChild > leftChild)){
+                     swap = rightChildIndex;
+                 }
+             }
+             if(swap === null) break;
+             this.values[idx] = this.values[swap];
+             this.values[swap] = element;
+             idx = swap;
+        }
+    }
+       
 }
 
 
@@ -1757,53 +1771,53 @@ class max_binary_heap:
     def insert(self, val):
         self.values.append(val)
         index = len(self.values) - 1
-        parent_index = math.floor((index-1)/2)
-        while (self.values[parent_index] < self.values[index]) and index > 0:
-            temp = self.values[index]
-            self.values[index] = self.values[parent_index]
-            self.values[parent_index] = temp
-            index = parent_index
+        element = self.values[index]
+        while index > 0:
             parent_index = math.floor((index - 1) / 2)
+            parent = self.values[parent_index]
+            if self.values[parent_index] >= self.values[index]:
+                break
+            self.values[parent_index] = element
+            self.values[index] = parent
+            index = parent_index
+
         return self.values
 
     def extract_max(self):
-        if not len(self.values):
-            return None
-        else:
+        if len(self.values) > 1:
             max = self.values[0]
-            if len(self.values) == 1:
-                self.values = []
-                return max
-            end = self.values[len(self.values) - 1]
-            self.values[len(self.values) - 1] = max
+            end = self.values.pop()
             self.values[0] = end
-            max = self.values.pop(len(self.values) - 1)
-            parent_index = 0
-            left_child_index = parent_index * 2 + 1
-            right_child_index = parent_index * 2 + 2
-            element = self.values[0]
-            while (left_child_index < len(self.values)) and (right_child_index < len(self.values)):
-                element = self.values[parent_index]
-                if(self.values[left_child_index] > element) or (self.values[right_child_index] > element):
-                    if self.values[left_child_index] < self.values[right_child_index]:
-                        self.values[parent_index] = self.values[right_child_index]
-                        self.values[right_child_index] = element
-                        parent_index = right_child_index
-                        #print(right_child_index)
-                    else:
-                        self.values[parent_index] = self.values[left_child_index]
-                        self.values[left_child_index] = element
-                        parent_index = left_child_index
-                        #print(left_child_index)
-                #print(self.values)
-                left_child_index = parent_index * 2 + 1
-                right_child_index = parent_index * 2 + 2
-            if len(self.values) == 2:
-                if self.values[0] < self.values[1]:
-                    temp = self.values[1]
-                    self.values[1] = self.values[0]
-                    self.values[0] = temp
-            return max
+            self.sink_down()
+        elif len(self.values) == 1:
+            max = self.values.pop()
+        else:
+            return None
+        return max
+
+    def sink_down(self):
+        idx = 0
+        length = len(self.values)
+        element = self.values[0]
+        while True:
+            left_child_index = 2 * idx + 1
+            right_child_index = 2 * idx + 2
+            swap = None
+            if left_child_index < length:
+                left_child = self.values[left_child_index]
+                if left_child > element:
+                    swap = left_child_index
+            if right_child_index < length:
+                right_child = self.values[right_child_index]
+                if (swap == None and right_child > element) or (swap != None and right_child > left_child):
+                    swap = right_child_index
+            if swap == None:
+                break
+            self.values[idx] = self.values[swap]
+            self.values[swap] = element
+            idx = swap
+
+
 
 
 heap = max_binary_heap()
@@ -1831,4 +1845,4 @@ print(heap.extract_max())
 print(heap.values)
 print(heap.extract_max())
 print(heap.extract_max())
-print(heap.extract_max())
+
