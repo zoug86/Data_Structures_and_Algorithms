@@ -1763,6 +1763,8 @@ heap.insert(12);
 '''
 
 # --In Python--#
+
+'''
 import math
 class max_binary_heap:
     def __init__(self):
@@ -1818,8 +1820,6 @@ class max_binary_heap:
             idx = swap
 
 
-
-
 heap = max_binary_heap()
 heap.insert(41)
 heap.insert(39)
@@ -1828,21 +1828,166 @@ heap.insert(18)
 heap.insert(27)
 heap.insert(12)
 heap.insert(55)
+'''
 
 
-print(heap.values)
-print(heap.extract_max())
-print(heap.values)
-print(heap.extract_max())
-print(heap.values)
-print(heap.extract_max())
-print(heap.values)
-print(heap.extract_max())
-print(heap.values)
-print(heap.extract_max())
-print(heap.values)
-print(heap.extract_max())
-print(heap.values)
-print(heap.extract_max())
-print(heap.extract_max())
 
+                    ##6##     ###########PRIORITY QUEUES############# June 29 2021
+
+                              ### Piority Queue with Max Binaryt Heap###
+
+# --In JavaScript--#
+'''
+class Node{
+    constructor(val, priority){
+        this.val = val;
+        this.priority = priority;
+    }
+}
+
+class priorityQueue{
+    constructor(){
+        this.values = [];
+    }
+
+    enqueue(val, priority){
+        let newNode = new Node(val, priority);
+        this.values.push(newNode);
+        let index = this.values.length - 1;
+        const element = this.values[index];
+        while(index > 0){
+            let parentIndex = Math.floor((index - 1)/2);
+            let parent =  this.values[parentIndex];
+            if(parent.priority >= element.priority) break;
+            this.values[parentIndex] = element;
+            this.values[index] = parent;
+            index = parentIndex;
+        }
+        return this.values;
+    }
+    dequeue(){
+        const max = this.values[0];
+        const end = this.values.pop();
+        if(this.values.length > 0){
+            this.values[0] = end;
+            this.sinkDown();
+        }
+        return max;
+    }
+    sinkDown(){
+        let idx = 0;
+        const length = this.values.length;
+        const element = this.values[0];
+        let leftChild, rightChild;
+        while(true){
+             let leftChildIndex = idx * 2 + 1;
+             let rightChildIndex = idx * 2 + 2;
+             let swap = null;
+             if(leftChildIndex < length){
+                 leftChild = this.values[leftChildIndex];
+                 if(leftChild.priority > element.priority){
+                     swap = leftChildIndex;
+                 }
+             }
+             if(rightChildIndex < length){
+                 rightChild = this.values[rightChildIndex];
+                 if((swap === null && rightChild.priority > element.priority) ||
+                  (swap !== null && rightChild.priority > element.priority)){
+                     swap = leftChildIndex;
+                 }
+             }
+             if(swap === null) break;
+             this.values[idx] = this.values[swap];
+             this.values[swap] = element;
+             idx = swap;
+        }
+    }
+       
+}
+
+
+let ER = new priorityQueue();
+
+ER.enqueue("common cold", 1);
+ER.enqueue("gunshot wound", 5);
+ER.enqueue("high fever", 2);
+ER.enqueue("broken arm", 4);
+ER.enqueue("glass in foot", 3);
+'''
+
+# --In Python--#
+
+import math
+class node:
+    def __init__(self, val, priority):
+        self.val = val
+        self.priority = priority
+
+class priority_queue:
+    def __init__(self):
+        self.values = []
+
+    def enqueue(self, val, priority):
+        new_node = node(val, priority)
+        self.values.append(new_node)
+        index = len(self.values) - 1
+        element = self.values[index]
+        while index > 0:
+            parent_index = math.floor((index - 1) / 2)
+            parent = self.values[parent_index]
+            if parent.priority >= element.priority:
+                break
+            self.values[parent_index] = element
+            self.values[index] = parent
+            index = parent_index
+
+        return self.values
+
+    def dequeue(self):
+        if len(self.values) > 1:
+            max = self.values[0]
+            end = self.values.pop()
+            self.values[0] = end
+            self.sink_down()
+        elif len(self.values) == 1:
+            max = self.values.pop()
+        else:
+            return None
+        return max
+
+    def sink_down(self):
+        idx = 0
+        length = len(self.values)
+        element = self.values[0]
+        while True:
+            left_child_index = 2 * idx + 1
+            right_child_index = 2 * idx + 2
+            swap = None
+            if left_child_index < length:
+                left_child = self.values[left_child_index]
+                if left_child.priority > element.priority:
+                    swap = left_child_index
+            if right_child_index < length:
+                right_child = self.values[right_child_index]
+                if (swap == None and right_child.priority > element.priority) or (swap != None and right_child.priority > left_child.priority):
+                    swap = right_child_index
+            if swap == None:
+                break
+            self.values[idx] = self.values[swap]
+            self.values[swap] = element
+            idx = swap
+
+
+ER = priority_queue();
+
+ER.enqueue("common cold", 1)
+ER.enqueue("gunshot wound", 5)
+ER.enqueue("high fever", 2)
+ER.enqueue("broken arm", 4)
+ER.enqueue("glass in foot", 3)
+
+print(ER.dequeue().val)
+print(ER.dequeue().val)
+print(ER.dequeue().val)
+print(ER.dequeue().val)
+print(ER.dequeue().val)
