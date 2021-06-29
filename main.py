@@ -1708,6 +1708,33 @@ class MaxBinaryHeap{
         }
         return this.values;
     }
+     // this is a remove method ( to remove the max element)
+    extractMax(){
+        let max = this.values[0];
+        let end = this.values[this.values.length - 1];
+        this.values[this.values.length - 1] = max;
+        this.values[0] = end;
+        max = this.values.pop();
+        let parentIndex = 0;
+        let leftChildIndex = parentIndex * 2 + 1;
+        let rightChikdIndex = parentIndex * 2 + 2;
+        let element = this.values[0];
+        while(this.values[leftChildIndex] > element || this.values[rightChikdIndex] > element){
+                element = this.values[parentIndex] 
+                if(this.values[leftChildIndex] < this.values[rightChikdIndex]){
+                  this.values[parentIndex] = this.values[rightChikdIndex];
+                  this.values[rightChikdIndex] = element;
+                  parentIndex = rightChikdIndex;
+                } else{
+                  this.values[parentIndex] = this.values[leftChildIndex];
+                  this.values[leftChildIndex] = element;
+                  parentIndex = leftChildIndex;
+                }
+            leftChildIndex = parentIndex * 2 + 1;
+            rightChikdIndex = parentIndex * 2 + 2;
+        }
+        return max;
+    }
 }
 
 
@@ -1739,6 +1766,45 @@ class max_binary_heap:
             parent_index = math.floor((index - 1) / 2)
         return self.values
 
+    def extract_max(self):
+        if not len(self.values):
+            return None
+        else:
+            max = self.values[0]
+            if len(self.values) == 1:
+                self.values = []
+                return max
+            end = self.values[len(self.values) - 1]
+            self.values[len(self.values) - 1] = max
+            self.values[0] = end
+            max = self.values.pop(len(self.values) - 1)
+            parent_index = 0
+            left_child_index = parent_index * 2 + 1
+            right_child_index = parent_index * 2 + 2
+            element = self.values[0]
+            while (left_child_index < len(self.values)) and (right_child_index < len(self.values)):
+                element = self.values[parent_index]
+                if(self.values[left_child_index] > element) or (self.values[right_child_index] > element):
+                    if self.values[left_child_index] < self.values[right_child_index]:
+                        self.values[parent_index] = self.values[right_child_index]
+                        self.values[right_child_index] = element
+                        parent_index = right_child_index
+                        #print(right_child_index)
+                    else:
+                        self.values[parent_index] = self.values[left_child_index]
+                        self.values[left_child_index] = element
+                        parent_index = left_child_index
+                        #print(left_child_index)
+                #print(self.values)
+                left_child_index = parent_index * 2 + 1
+                right_child_index = parent_index * 2 + 2
+            if len(self.values) == 2:
+                if self.values[0] < self.values[1]:
+                    temp = self.values[1]
+                    self.values[1] = self.values[0]
+                    self.values[0] = temp
+            return max
+
 
 heap = max_binary_heap()
 heap.insert(41)
@@ -1748,7 +1814,21 @@ heap.insert(18)
 heap.insert(27)
 heap.insert(12)
 heap.insert(55)
-heap.insert(1)
-heap.insert(100)
+
 
 print(heap.values)
+print(heap.extract_max())
+print(heap.values)
+print(heap.extract_max())
+print(heap.values)
+print(heap.extract_max())
+print(heap.values)
+print(heap.extract_max())
+print(heap.values)
+print(heap.extract_max())
+print(heap.values)
+print(heap.extract_max())
+print(heap.values)
+print(heap.extract_max())
+print(heap.extract_max())
+print(heap.extract_max())
