@@ -684,9 +684,9 @@ def radix_sort(arr):
 print(radix_sort([10, 5, 123, 78, 2, 3456, 9999]))
 '''
 
-###### Fourth topic: Data Structures - June 10 2021 ######
+                     ###### Fourth topic: Data Structures - June 10 2021 ######
 
-    ##1##     ###########Singly LinkedLists#############
+                        ##1##     ###########Singly LinkedLists#############
 
 #--In JavaScript--#
 
@@ -1917,6 +1917,7 @@ ER.enqueue("glass in foot", 3);
 
 # --In Python--#
 
+'''
 import math
 class node:
     def __init__(self, val, priority):
@@ -1978,7 +1979,7 @@ class priority_queue:
             idx = swap
 
 
-ER = priority_queue();
+ER = priority_queue()
 
 ER.enqueue("common cold", 1)
 ER.enqueue("gunshot wound", 5)
@@ -1991,3 +1992,138 @@ print(ER.dequeue().val)
 print(ER.dequeue().val)
 print(ER.dequeue().val)
 print(ER.dequeue().val)
+'''
+
+                                ### Piority Queue with Min Binaryt Heap###
+                     ### FLIP the comparison signs in enqueue and dequeue methods)###
+
+
+                    ##7##     ###########HASHING TABLES############# June 29 2021
+
+# --In JavaScript--#
+'''
+class HashTable{
+      constructor(size=53){
+        this.keyMap = new Array(size);
+      }
+      _hash(key){
+         let total = 0;
+         let WEIRD_PRIME = 31;
+         for(let i = 0; i < Math.min(key.length, 100); i++){
+             let char = key[i];
+             let value = char.charCodeAt(0) - 96;
+             total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+         }
+         return total;
+      }
+      set(key, val){
+          const hashVal = this._hash(key);
+          if(!this.keyMap[hashVal]) this.keyMap[hashVal] = [];
+          this.keyMap[hashVal].push([key, val]);     
+      }
+      get(key){
+          const hashVal = this._hash(key);
+          if(!this.keyMap[hashVal]) return undefined;
+          for(let arr of this.keyMap[hashVal]){
+               if(arr[0] === key) return arr[1];
+          }    
+      }
+      keys(){
+          let keysArr = [];
+          for(let i = 0; i < this.keyMap.length; i++){
+              if(this.keyMap[i]){
+                  for(let arr of this.keyMap[i]){
+                      if(!keysArr.includes(arr[0])){
+                       keysArr.push(arr[0]);
+                      }
+                  }
+              }
+          } 
+          return keysArr;
+      }
+      values(){
+          let valuesArr = [];
+          for(let i = 0; i < this.keyMap.length; i++){
+              if(this.keyMap[i]){
+                  for(let arr of this.keyMap[i]){
+                      if(!valuesArr.includes(arr[1])){
+                          valuesArr.push(arr[1]);
+                      }
+                       
+                  }
+              }
+          } 
+          return valuesArr;
+      }
+}
+
+let hash = new HashTable();
+
+hash.set("hello", 43);
+hash.set("hi", 42);
+hash.set("bye", 40);
+hash.set("hey", 48);
+hash.set("morning", 48);
+hash.set("night", 48);
+'''
+
+# --In Python--#
+import math
+
+class HashTable:
+    def __init__(self, size=53):
+        self.keyMap = size*[None]
+
+    def _hash(self, key):
+        total = 0
+        WEIRD_PRIME = 31
+        for i in range(min(len(key), 100)):
+            char = key[i]
+            value = ord(char[0]) - 96
+            total = (total * WEIRD_PRIME + value) % len(self.keyMap)
+        return total
+
+    def set(self, key, val):
+        hash_val = self._hash(key)
+        if not self.keyMap[hash_val]:
+            self.keyMap[hash_val] = []
+        self.keyMap[hash_val].append([key, val])
+
+    def get(self, key):
+        hash_val = self._hash(key)
+        if not self.keyMap[hash_val]:
+            return "key does not exist"
+        for arr in self.keyMap[hash_val]:
+            if arr[0] == key:
+                return arr[1]
+
+    def keys(self):
+        keys_arr = []
+        for i in range(len(self.keyMap)):
+            if self.keyMap[i]:
+                for arr in self.keyMap[i]:
+                    if arr[0] not in keys_arr:
+                        keys_arr.append(arr[0])
+        return keys_arr
+
+    def values(self):
+        values_arr = []
+        for i in range(len(self.keyMap)):
+            if self.keyMap[i]:
+                for arr in self.keyMap[i]:
+                    if arr[1] not in values_arr:
+                        values_arr.append(arr[1])
+        return values_arr
+
+
+hash = HashTable()
+
+hash.set("hello", 43)
+hash.set("hi", 42)
+hash.set("bye", 40)
+hash.set("hey", 48)
+hash.set("morning", 48)
+hash.set("night", 48)
+
+print(hash.keys())
+print(hash.values())
