@@ -2211,7 +2211,29 @@ class Graph{
                 
             }
          return result;
-    }     
+    }
+    
+     BFSIterative(startVertex){
+        if (!startVertex) return null;
+        let result = [];
+        let queue = [];
+        let visitVertices = {};
+        queue.push(startVertex);
+        visitVertices[startVertex] = true;
+        while(queue.length){
+            console.log(queue);
+              let vertex = queue.shift();
+              result.push(vertex);
+              this.adjacencyList[vertex].forEach( neighbor => {
+                  if(!visitVertices[neighbor]){
+                     visitVertices[neighbor] = true;
+                    queue.push(neighbor);
+                  }
+              })  
+                
+            }
+         return result;
+    }                   
 }
 
 
@@ -2278,6 +2300,20 @@ class Graph:
                     stack.append(neighbor)
         return result
 
+    def bfs_iterative(self, start_vertex):
+        result = []
+        queue = []
+        visited_vertices = {}
+        queue.append(start_vertex)
+        visited_vertices[start_vertex] = True
+        while len(queue):
+            vertex = queue.pop(0)
+            result.append(vertex)
+            for neighbor in self.adjacency_list[vertex]:
+                if neighbor not in visited_vertices:
+                    visited_vertices[neighbor] = True
+                    queue.append(neighbor)
+        return result
 
 
 graph = Graph()
@@ -2304,7 +2340,7 @@ graph.add_edge("E", "F")
 
 #print(graph.adjacency_list)
 
-print(graph.dfs_iterative("A"))
+print(graph.bfs_iterative("A"))
 
 
 
