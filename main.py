@@ -1834,7 +1834,7 @@ heap.insert(55)
 
                     ##6##     ###########PRIORITY QUEUES############# June 29 2021
 
-                              ### Piority Queue with Max Binaryt Heap###
+                              ### Piority Queue with Max Binary Heap###
 
 # --In JavaScript--#
 '''
@@ -2170,6 +2170,26 @@ class Graph{
         }
         delete this.adjencencyList[vertex];
     }
+    
+    DFSRecursive(startVertex){
+        let result = [];
+        let visitVertices = {};
+        const adjacencyList = this.adjacencyList;
+        function DFS(vertex){
+            if (!vertex) return null;
+            result.push(vertex);
+            visitVertices[vertex] = true;
+            for(let i = 0; i < adjacencyList[vertex].length; i++){
+                let newVetrtex = adjacencyList[vertex][i];
+                if(visitVertices[newVetrtex] !== true){
+                     DFS(newVetrtex);
+                }
+                // you can use forEach instead (ajacencyList[vertex].forEach(neighbor => ...)) 
+            } 
+        }
+        DFS(startVertex);
+        return result;
+    }
 }
 
 
@@ -2208,24 +2228,45 @@ class Graph:
             self.remove_edge(vertex, self.adjacency_list[vertex][0])
         del self.adjacency_list[vertex]
 
+    def dfs_recursive(self, start_vertex):
+        result = []
+        visited_vertices = {}
+        adjacent_list = self.adjacency_list
+        def dfs(vertex):
+            result.append(vertex)
+            visited_vertices[vertex] = True
+            for neighbor in adjacent_list[vertex]:
+                if neighbor not in visited_vertices:
+                    dfs(neighbor)
+        dfs(start_vertex)
+        return result
+
 
 graph = Graph()
 
-graph.add_vertex("Tokyo")
-graph.add_vertex("Tunis")
-graph.add_vertex("Paris")
-graph.add_vertex("Rome")
+graph.add_vertex("A")
+graph.add_vertex("B")
+graph.add_vertex("C")
+graph.add_vertex("D")
+graph.add_vertex("E")
+graph.add_vertex("F")
 
-graph.add_edge("Tokyo", "Tunis")
-graph.add_edge("Paris", "Tokyo")
-graph.add_edge("Rome", "Tunis")
-print(graph.adjacency_list)
+graph.add_edge("A", "B")
+graph.add_edge("A", "C")
+graph.add_edge("B", "D")
+graph.add_edge("C", "E")
+graph.add_edge("D", "E")
+graph.add_edge("D", "F")
+graph.add_edge("E", "F")
 
-graph.remove_vertex("Tunis")
+#print(graph.adjacency_list)
+
+#graph.remove_vertex("Tunis")
 #graph.remove_edge("Tunis", "Rome")
 
-print(graph.adjacency_list)
+#print(graph.adjacency_list)
 
+print(graph.dfs_recursive("A"))
 
 
 
