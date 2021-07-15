@@ -2190,6 +2190,28 @@ class Graph{
         DFS(startVertex);
         return result;
     }
+    
+    DFSIterative(startVertex){
+        if (!startVertex) return null;
+        let result = [];
+        let stack = [];
+        let visitVertices = {};
+        stack.push(startVertex);
+        visitVertices[startVertex] = true;
+        while(stack.length){
+            console.log(stack);
+              let vertex = stack.pop();
+              result.push(vertex);
+              this.adjacencyList[vertex].forEach( neighbor => {
+                  if(!visitVertices[neighbor]){
+                     visitVertices[neighbor] = true;
+                    stack.push(neighbor);
+                  }
+              })  
+                
+            }
+         return result;
+    }     
 }
 
 
@@ -2241,6 +2263,22 @@ class Graph:
         dfs(start_vertex)
         return result
 
+    def dfs_iterative(self, start_vertex):
+        result = []
+        stack = []
+        visited_vertices = {}
+        stack.append(start_vertex)
+        visited_vertices[start_vertex] = True
+        while len(stack):
+            vertex = stack.pop(-1)
+            result.append(vertex)
+            for neighbor in self.adjacency_list[vertex]:
+                if neighbor not in visited_vertices:
+                    visited_vertices[neighbor] = True
+                    stack.append(neighbor)
+        return result
+
+
 
 graph = Graph()
 
@@ -2266,7 +2304,7 @@ graph.add_edge("E", "F")
 
 #print(graph.adjacency_list)
 
-print(graph.dfs_recursive("A"))
+print(graph.dfs_iterative("A"))
 
 
 
