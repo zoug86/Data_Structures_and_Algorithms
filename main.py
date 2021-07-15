@@ -2068,6 +2068,8 @@ hash.set("night", 48);
 '''
 
 # --In Python--#
+
+'''
 import math
 
 class HashTable:
@@ -2127,3 +2129,127 @@ hash.set("night", 48)
 
 print(hash.keys())
 print(hash.values())
+'''
+
+                    ##7##     ###########GRAPHS######## July 14 2021
+            # Implemented with Adjencency List  and Undirected graphs##
+# --In JavaScript--#
+
+'''
+class Graph{
+    constructor(){
+        this.adjencencyList = {};
+    }
+
+    addVertex(vertex){
+        if(!this.adjencencyList[vertex]) this.adjencencyList[vertex] = [];
+    }
+
+    addEdge(vertex1, vertex2){
+        this.adjencencyList[vertex1].push(vertex2);
+        this.adjencencyList[vertex2].push(vertex1);
+    }
+
+    removeEdge(vertex1, vertex2){
+        //let index1 = this.adjencencyList[vertex1].indexOf(vertex2);
+        //this.adjencencyList[vertex1].splice(index1, 1);
+        //let index2 = this.adjencencyList[vertex2].indexOf(vertex1);
+        //this.adjencencyList[vertex2].splice(index2, 1);
+        // or use the filter method:
+        this.adjencencyList[vertex1] = this.adjencencyList[vertex1].filter(
+             v => v !== vertex2
+        );
+        this.adjencencyList[vertex2] = this.adjencencyList[vertex2].filter(
+             v => v !== vertex1
+        );
+    }
+
+    removeVertex(vertex){
+        while(this.adjencencyList[vertex].length){
+            this.removeEdge(vertex, this.adjencencyList[vertex][0]);
+        }
+        delete this.adjencencyList[vertex];
+    }
+}
+
+
+let graph = new Graph();
+
+graph.addVertex("Tokyo");
+graph.addVertex("Tunis");
+graph.addVertex("Paris");
+graph.addVertex("Rome");
+
+graph.addEdge("Tokyo", "Tunis");
+graph.addEdge("Paris", "Tokyo");
+graph.addEdge("Rome", "Tunis")
+'''
+
+# --In Python--#
+
+class Graph:
+    def __init__(self):
+        self.adjacency_list = {}
+
+    def add_vertex(self, vertex):
+        #if not self.adjacency_list[vertex]:
+        self.adjacency_list[vertex] = []
+
+    def add_edge(self, vertex1, vertex2):
+        self.adjacency_list[vertex1].append(vertex2)
+        self.adjacency_list[vertex2].append(vertex1)
+
+    def remove_edge(self, vertex1, vertex2):
+        self.adjacency_list[vertex1].remove(vertex2)
+        self.adjacency_list[vertex2].remove(vertex1)
+
+    def remove_vertex(self, vertex):
+        while len(self.adjacency_list[vertex]):
+            self.remove_edge(vertex, self.adjacency_list[vertex][0])
+        del self.adjacency_list[vertex]
+
+
+graph = Graph()
+
+graph.add_vertex("Tokyo")
+graph.add_vertex("Tunis")
+graph.add_vertex("Paris")
+graph.add_vertex("Rome")
+
+graph.add_edge("Tokyo", "Tunis")
+graph.add_edge("Paris", "Tokyo")
+graph.add_edge("Rome", "Tunis")
+print(graph.adjacency_list)
+
+graph.remove_vertex("Tunis")
+#graph.remove_edge("Tunis", "Rome")
+
+print(graph.adjacency_list)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
