@@ -2397,7 +2397,6 @@ class weightedGraph{
             }
         }
         let distance;
-        let count = 0;
         //console.log(queue, queue.values.length);
         while(queue.values.length){
             smallest = queue.dequeue().val;
@@ -2463,7 +2462,7 @@ class priority_queue:
         return self.values.pop(0)
 
 
-class weighted_Graph:
+class weighted_graph:
     def __init__(self):
         self.adjacency_list = {}
 
@@ -2475,15 +2474,60 @@ class weighted_Graph:
         self.adjacency_list[vertex1].append({"node": vertex2, "weight": weight})
         self.adjacency_list[vertex2].append({"node": vertex1, "weight": weight})
 
+    def Dijkstra(self, start, end):
+        distances = {}
+        queue = priority_queue()
+        previous = {}
+        path = []
+        infinity = float('inf')
+        for vertex in self.adjacency_list:
+            previous[vertex] = None
+            if vertex == start:
+                distances[vertex] = 0
+                queue.enqueue(vertex, 0)
+            else:
+                distances[vertex] = infinity
+                queue.enqueue(vertex, infinity)
 
-queue = priority_queue()
-queue.enqueue("Going back Home", 3)
-queue.enqueue("Getting married", 2)
-queue.enqueue("finding a job", 1)
-queue.enqueue("buying a house", 4)
+        while len(queue.values):
+            smallest = queue.dequeue()["val"]
+            if smallest == end:
+                while previous[smallest]:
+                    path.append(smallest)
+                    smallest = previous[smallest]
+                break
+            if smallest or distances[smallest] != infinity:
+                for neighbor in self.adjacency_list[smallest]:
+                    distance = distances[smallest] + neighbor["weight"]
+                    if distance < distances[neighbor["node"]]:
+                        distances[neighbor["node"]] = distance
+                        previous[neighbor["node"]] = smallest
+                        queue.enqueue(neighbor["node"], distance)
+        path.append(smallest)
+        return path[::-1]  # reverse using the slicing operator
 
-print(queue.values)
 
+
+g = weighted_graph()
+
+g.add_vertex("A")
+g.add_vertex("B")
+g.add_vertex("C")
+g.add_vertex("D")
+g.add_vertex("E")
+g.add_vertex("F")
+
+
+g.add_edge("A","B", 4)
+g.add_edge("A","C", 2)
+g.add_edge("B","E", 3)
+g.add_edge("C","D", 2)
+g.add_edge("D","E", 3)
+g.add_edge("C","F", 4)
+g.add_edge("D","F", 1)
+g.add_edge("F","E", 1)
+
+print(g.Dijkstra("A", "E"))
 
 
 
