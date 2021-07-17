@@ -2346,6 +2346,8 @@ print(graph.bfs_iterative("A"))
                 ##8##     ###########Dijkstra's Algorithm######## July 15 2021
                           # Shortest path for weighted graphs##
                                 ## SIMPLE PRIORITY QUEUE#####
+
+
 # --In JavaScript--#
 '''
 class PriorityQueue{
@@ -2452,6 +2454,7 @@ g.Dijkstra("A", "E")
 
 # --In Python--#
 
+'''
 class priority_queue:
     def __init__(self):
         self.values = []
@@ -2507,7 +2510,6 @@ class weighted_graph:
         return path[::-1]  # reverse using the slicing operator
 
 
-
 g = weighted_graph()
 
 g.add_vertex("A")
@@ -2516,7 +2518,6 @@ g.add_vertex("C")
 g.add_vertex("D")
 g.add_vertex("E")
 g.add_vertex("F")
-
 
 g.add_edge("A","B", 4)
 g.add_edge("A","C", 2)
@@ -2528,12 +2529,293 @@ g.add_edge("D","F", 1)
 g.add_edge("F","E", 1)
 
 print(g.Dijkstra("A", "E"))
+'''
+
+                    ##8##     ###########Dijkstra's Algorithm######## July 16 2021
+                                  # Shortest path for weighted graphs##
+                                     ## Using Binary Heaps (min)#####
 
 
+# --In JavaScript--#
+
+'''
+class Node{
+    constructor(val, priority){
+        this.val = val;
+        this.priority = priority;
+    }
+}
+
+class priorityQueue_Heap_min{
+    constructor(){
+        this.values = [];
+    }
+
+    enqueue(val, priority){
+        let newNode = new Node(val, priority);
+        this.values.push(newNode);
+        let index = this.values.length - 1;
+        const element = this.values[index];
+        while(index > 0){
+            let parentIndex = Math.floor((index - 1)/2);
+            let parent =  this.values[parentIndex];
+            if(parent.priority <= element.priority) break;
+            this.values[parentIndex] = element;
+            this.values[index] = parent;
+            index = parentIndex;
+        }
+        //return this.values;
+    }
+    dequeue(){
+        const min = this.values[0];
+        const end = this.values.pop();
+        if(this.values.length > 0){
+            this.values[0] = end;
+            this.sinkDown();
+        }
+        return min;
+    }
+    sinkDown(){
+        let idx = 0;
+        const length = this.values.length;
+        const element = this.values[0];
+        let leftChild, rightChild;
+        while(true){
+             let leftChildIndex = idx * 2 + 1;
+             let rightChildIndex = idx * 2 + 2;
+             let swap = null;
+             if(leftChildIndex < length){
+                 leftChild = this.values[leftChildIndex];
+                 if(leftChild.priority < element.priority){
+                     swap = leftChildIndex;
+                 }
+             }
+             if(rightChildIndex < length){
+                 rightChild = this.values[rightChildIndex];
+                 if(
+                     (swap === null && rightChild.priority < element.priority) ||
+                     (swap !== null && rightChild.priority < leftChild.priority)
+                    ){
+                         swap = rightChildIndex;
+                     }
+             }
+             if(swap === null) break;
+             this.values[idx] = this.values[swap];
+             this.values[swap] = element;
+             idx = swap;
+        }
+    }      
+}
+
+class weightedGraph{
+    constructor(){
+        this.adjacencyList = {};
+    }
+
+    addVertex(vertex){
+        if(!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
+    }
+
+    addEdge(vertex1, vertex2, weight){
+        this.adjacencyList[vertex1].push({node: vertex2, weight});
+        this.adjacencyList[vertex2].push({node: vertex1, weight});
+    }
+    Dijkstra(start, end){
+        let distances = {};
+        let queue = new priorityQueue_Heap_min();
+        let previous = {};
+        let path = [];
+        let smallest;
+        for(let vertex in this.adjacencyList){
+            previous[vertex] = null;
+            if(vertex === start){
+                 distances[vertex] = 0;
+                 queue.enqueue(vertex, 0);
+            }else{
+                 distances[vertex] = Infinity;
+                  queue.enqueue(vertex, Infinity);
+            }
+        }
+        let distance;
+        //console.log(queue, queue.values.length);
+        while(queue.values.length){
+            smallest = queue.dequeue().val;
+            if(smallest === end){
+                  while(previous[smallest]){
+                      path.push(smallest);
+                      smallest = previous[smallest];
+                  } 
+                  break;         
+            }
+            if(smallest || distances[smallest] !== Infinity){
+                this.adjacencyList[smallest].forEach(neighbor => {
+                      // find neighboring node
+                      //let nextNode = this
+                      // calculate new distance to neighboring node
+                      distance = distances[smallest] + neighbor.weight;
+                      if(distance < distances[neighbor.node]){
+                          //updating new smallest distance to neighbor
+                          distances[neighbor.node] = distance;
+                          // updating previous - How we get to neighbor
+                          previous[neighbor.node] = smallest;
+                          // enqueue in priority queue with new priority
+                          queue.enqueue(neighbor.node, distance)
+                      }
+                });
+            }
+            
+        }
+        return path.concat(smallest).reverse();
+    }
+}
+
+let graph = new weightedGraph()
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addVertex("E");
+graph.addVertex("F");
+
+graph.addEdge("A","B", 4);
+graph.addEdge("A","C", 2);
+graph.addEdge("B","E", 3);
+graph.addEdge("C","D", 2);
+graph.addEdge("C","F", 4);
+graph.addEdge("D","E", 3);
+graph.addEdge("D","F", 1);
+graph.addEdge("E","F", 1);
+
+graph.Dijkstra("A", "E");
+'''
+
+# --In Python--#
+
+import math
+class node:
+    def __init__(self, val, priority):
+        self.val = val
+        self.priority = priority
+
+class priority_queue_heap_min:
+    def __init__(self):
+        self.values = []
+
+    def enqueue(self, val, priority):
+        new_node = node(val, priority)
+        self.values.append(new_node)
+        index = len(self.values) - 1
+        element = self.values[index]
+        while index > 0:
+            parent_index = math.floor((index - 1) / 2)
+            parent = self.values[parent_index]
+            if parent.priority <= element.priority:
+                break
+            self.values[parent_index] = element
+            self.values[index] = parent
+            index = parent_index
+
+        return self.values
+
+    def dequeue(self):
+        if len(self.values) > 1:
+            min = self.values[0]
+            end = self.values.pop()
+            self.values[0] = end
+            self.sink_down()
+        elif len(self.values) == 1:
+            min = self.values.pop()
+        else:
+            return None
+        return min
+
+    def sink_down(self):
+        idx = 0
+        length = len(self.values)
+        element = self.values[0]
+        while True:
+            left_child_index = 2 * idx + 1
+            right_child_index = 2 * idx + 2
+            swap = None
+            if left_child_index < length:
+                left_child = self.values[left_child_index]
+                if left_child.priority < element.priority:
+                    swap = left_child_index
+            if right_child_index < length:
+                right_child = self.values[right_child_index]
+                if (swap == None and right_child.priority < element.priority) or (swap != None and right_child.priority < left_child.priority):
+                    swap = right_child_index
+            if swap == None:
+                break
+            self.values[idx] = self.values[swap]
+            self.values[swap] = element
+            idx = swap
 
 
+class weighted_graph:
+    def __init__(self):
+        self.adjacency_list = {}
+
+    def add_vertex(self, vertex):
+        #if not self.adjacency_list[vertex]:
+        self.adjacency_list[vertex] = []
+
+    def add_edge(self, vertex1, vertex2, weight):
+        self.adjacency_list[vertex1].append({"node": vertex2, "weight": weight})
+        self.adjacency_list[vertex2].append({"node": vertex1, "weight": weight})
+
+    def Dijkstra(self, start, end):
+        distances = {}
+        queue = priority_queue_heap_min()
+        previous = {}
+        path = []
+        infinity = float('inf')
+        for vertex in self.adjacency_list:
+            previous[vertex] = None
+            if vertex == start:
+                distances[vertex] = 0
+                queue.enqueue(vertex, 0)
+            else:
+                distances[vertex] = infinity
+                queue.enqueue(vertex, infinity)
+
+        while len(queue.values):
+            smallest = queue.dequeue().val
+            if smallest == end:
+                while previous[smallest]:
+                    path.append(smallest)
+                    smallest = previous[smallest]
+                break
+            if smallest or distances[smallest] != infinity:
+                for neighbor in self.adjacency_list[smallest]:
+                    distance = distances[smallest] + neighbor["weight"]
+                    if distance < distances[neighbor["node"]]:
+                        distances[neighbor["node"]] = distance
+                        previous[neighbor["node"]] = smallest
+                        queue.enqueue(neighbor["node"], distance)
+        path.append(smallest)
+        return path[::-1]  # reverse using the slicing operator
 
 
+g = weighted_graph()
+
+g.add_vertex("A")
+g.add_vertex("B")
+g.add_vertex("C")
+g.add_vertex("D")
+g.add_vertex("E")
+g.add_vertex("F")
+
+g.add_edge("A","B", 4)
+g.add_edge("A","C", 2)
+g.add_edge("B","E", 3)
+g.add_edge("C","D", 2)
+g.add_edge("D","E", 3)
+g.add_edge("C","F", 4)
+g.add_edge("D","F", 1)
+g.add_edge("F","E", 1)
+
+print(g.Dijkstra("A", "E"))
 
 
 
