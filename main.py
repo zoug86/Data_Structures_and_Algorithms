@@ -2838,6 +2838,8 @@ fib(6);
 '''
 
 # --In Python--#
+
+'''
 n = int(input("Enter a number: "))
 memo = [0] * n
 
@@ -2852,9 +2854,38 @@ def fib(n, memo = [0] * (n+1)):
     return res
 
 print(fib(n))
+'''
 
 
+                            ## Using Tabulation ##
+
+# --In JavaScript--#
+
+'''
+/// Fibonacci sequence Dynamic Programming using Tabulation (Bottom up):
+
+function fib(n){
+    if(n <= 2) return 1;
+    let fibNums = [0, 1, 1];
+    for(let i = 3; i <= n; i++){
+        fibNums[i] = fibNums[i-1] + fibNums[i-2];
+    }
+    return fibNums[n];
+}
+
+fib(10000);
+'''
+
+# --In Python--#
 
 
+def fib(n):
+    if n <= 2:
+        return 1
+    fib_nums = [0, 1, 1]
+    for i in range(3, n+1):
+        fib_nums.append(fib_nums[i-1] + fib_nums[i-2])
+    return fib_nums[n]
 
+print(fib(100))
 
