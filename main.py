@@ -2531,7 +2531,7 @@ g.add_edge("F","E", 1)
 print(g.Dijkstra("A", "E"))
 '''
 
-                    ##8##     ###########Dijkstra's Algorithm######## July 16 2021
+                    ##9##     ###########Dijkstra's Algorithm######## July 16 2021
                                   # Shortest path for weighted graphs##
                                      ## Using Binary Heaps (min)#####
 
@@ -2690,7 +2690,7 @@ graph.Dijkstra("A", "E");
 '''
 
 # --In Python--#
-
+'''
 import math
 class node:
     def __init__(self, val, priority):
@@ -2816,10 +2816,42 @@ g.add_edge("D","F", 1)
 g.add_edge("F","E", 1)
 
 print(g.Dijkstra("A", "E"))
+'''
 
+                        ##10##     ###########Dynamic Programming######## July 17 2021
+                                        ## Using Memoization ##
 
+# --In JavaScript--#
 
+'''
+// Fibonacci sequence Dynamic Programming using Memoization:
 
+function fib(n, memo=[]){
+    if(memo[n] !== undefined) return memo[n];
+    if(n <= 2) return 1;
+    let res = fib(n-1, memo) + fib(n-2, memo);
+    memo[n] = res;
+    return res;
+}
+
+fib(6);
+'''
+
+# --In Python--#
+n = int(input("Enter a number: "))
+memo = [0] * n
+
+def fib(n, memo = [0] * (n+1)):
+    if memo[n] != 0:
+        return memo[n]
+    if n <= 2:
+        return 1
+    res = fib(n-1, memo) + fib(n-2, memo)
+    memo[n] = res
+    #print(memo)
+    return res
+
+print(fib(n))
 
 
 
